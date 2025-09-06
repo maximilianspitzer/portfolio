@@ -15,8 +15,7 @@ export default function WorkGrid() {
   const openModal = (project: Project) => {
     setSelectedProject(project);
     
-    // Track project view and modal open
-    trackPortfolioEvent.projectView(project.id, project.title);
+    // Track project modal open
     trackPortfolioEvent.projectModalOpen(project.id, project.title);
   };
 

@@ -8,16 +8,12 @@ import Process from '@/components/process';
 import ContactStrip from '@/components/contact-strip';
 import { 
   useScrollDepthTracking, 
-  useTimeOnPageTracking, 
-  usePageLoadTracking, 
   useExternalLinkTracking 
 } from '@/hooks/useAnalyticsTracking';
 
 export default function Home() {
-  // Initialize analytics tracking
+  // Initialize meaningful analytics tracking only
   useScrollDepthTracking();
-  useTimeOnPageTracking('home');
-  usePageLoadTracking('home');
   useExternalLinkTracking();
 
   return (

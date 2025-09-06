@@ -97,10 +97,6 @@ export const trackPortfolioEvent = {
   },
   
   // Work/Project events
-  projectView: (projectId: string, projectTitle: string) => {
-    trackEvent('Project View', { projectId, projectTitle });
-  },
-  
   projectModalOpen: (projectId: string, projectTitle: string) => {
     trackEvent('Project Modal Open', { projectId, projectTitle });
   },
@@ -113,32 +109,9 @@ export const trackPortfolioEvent = {
     trackEvent('Project Link Click', { projectId, linkType, url });
   },
   
-  // Image carousel events
-  carouselNavigation: (projectId: string, direction: 'next' | 'prev', imageIndex: number) => {
-    trackEvent('Carousel Navigation', { projectId, direction, imageIndex });
-  },
-  
-  carouselImageClick: (projectId: string, imageIndex: number) => {
-    trackEvent('Carousel Image Click', { projectId, imageIndex });
-  },
-  
-  // Services section events
-  serviceClick: (serviceName: string) => {
-    trackEvent('Service Click', { serviceName });
-  },
-  
-  // Process section events
-  processStepView: (stepNumber: number, stepTitle: string) => {
-    trackEvent('Process Step View', { stepNumber, stepTitle });
-  },
-  
   // Contact events
   contactMethodClick: (method: 'email' | 'phone' | 'social', value: string) => {
     trackEvent('Contact Method Click', { method, value });
-  },
-  
-  contactFormInteraction: (field: string) => {
-    trackEvent('Contact Form Interaction', { field });
   },
   
   // Social media events
@@ -146,32 +119,19 @@ export const trackPortfolioEvent = {
     trackEvent('Social Link Click', { platform, url, location });
   },
   
-  // Download events
-  resumeDownload: (language: string, format: string) => {
-    trackEvent('Resume Download', { language, format });
-  },
-  
   // Legal pages
   legalPageView: (page: 'impressum' | 'datenschutz') => {
     trackEvent('Legal Page View', { page });
   },
   
-  // Search and filter events
-  workFilter: (filter: string, category: string) => {
-    trackEvent('Work Filter', { filter, category });
-  },
-  
-  workSearch: (searchTerm: string, resultsCount: number) => {
-    trackEvent('Work Search', { searchTerm, resultsCount });
-  },
-  
-  // Scroll and engagement events
-  sectionView: (section: string, timeSpent: number) => {
-    trackEvent('Section View', { section, timeSpent });
-  },
-  
-  pageScrollDepth: (depth: '25%' | '50%' | '75%' | '100%') => {
+  // Scroll depth (simplified)
+  pageScrollDepth: (depth: '50%' | '100%') => {
     trackEvent('Page Scroll Depth', { depth });
+  },
+  
+  // Simple section tracking (no time data)
+  sectionView: (section: string) => {
+    trackEvent('Section Viewed', { section });
   },
   
   // Skip to content accessibility
@@ -184,11 +144,6 @@ export const trackPortfolioEvent = {
     trackEvent('404 Error', { path, referrer });
   },
   
-  // Performance events
-  pageLoadTime: (loadTime: number, route: string) => {
-    trackEvent('Page Load Time', { loadTime, route });
-  },
-  
   // Cookie consent events
   cookieConsentAccepted: () => {
     trackEvent('Cookie Consent Accepted');
@@ -198,24 +153,9 @@ export const trackPortfolioEvent = {
     trackEvent('Cookie Consent Declined');
   },
   
-  // Dark mode / theme events (if implemented)
-  themeChange: (theme: 'light' | 'dark' | 'system') => {
-    trackEvent('Theme Change', { theme });
-  },
-  
-  // Newsletter or form submissions
-  formSubmission: (formType: string, success: boolean, errors?: string[]) => {
-    trackEvent('Form Submission', { formType, success, errors });
-  },
-  
   // External link tracking
   externalLinkClick: (url: string, context: string) => {
     trackEvent('External Link Click', { url, context });
-  },
-  
-  // Time on page (useful for engagement)
-  timeOnPage: (page: string, timeSpent: number) => {
-    trackEvent('Time on Page', { page, timeSpent });
   }
 };
 

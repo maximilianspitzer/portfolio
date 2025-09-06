@@ -8,10 +8,6 @@ export default function Services() {
   const { dictionary } = useLanguage();
   const sectionRef = useSectionTracking('services');
 
-  const handleServiceClick = (serviceName: string) => {
-    trackPortfolioEvent.serviceClick(serviceName);
-  };
-
   return (
     <section ref={sectionRef} id="services" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
@@ -28,8 +24,7 @@ export default function Services() {
           {dictionary.services.items.map((service, index) => (
             <div
               key={index}
-              onClick={() => handleServiceClick(service.title)}
-              className="bg-background p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group cursor-pointer"
+              className="bg-background p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group"
             >
               <div className="mb-4">
                 <div className="w-12 h-12 bg-foreground rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

@@ -33,30 +33,15 @@ export default function ImageCarousel({ images, alt, projectId }: ImageCarouselP
   const goToNext = () => {
     const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
-    
-    // Track carousel navigation
-    if (projectId) {
-      trackPortfolioEvent.carouselNavigation(projectId, 'next', newIndex);
-    }
   };
 
   const goToPrevious = () => {
     const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
-    
-    // Track carousel navigation
-    if (projectId) {
-      trackPortfolioEvent.carouselNavigation(projectId, 'prev', newIndex);
-    }
   };
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
-    
-    // Track carousel navigation
-    if (projectId) {
-      trackPortfolioEvent.carouselImageClick(projectId, index);
-    }
   };
 
   if (!images.length) return null;
