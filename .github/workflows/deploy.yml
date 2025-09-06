@@ -22,9 +22,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+      - name: Setup Corepack (ensure availability)
+        run: npm i -g corepack
 
       - name: Enable Corepack
         run: corepack enable
+
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@latest --activate
+
+      - name: Add pnpm to PATH
+        run: echo "$(corepack which pnpm)" >> $GITHUB_PATH
 
       - name: Install pnpm
         run: corepack prepare pnpm@latest --activate
