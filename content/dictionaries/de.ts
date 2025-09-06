@@ -2,7 +2,7 @@ export const de = {
   // Navigation
   nav: {
     about: 'Über mich',
-    work: 'Arbeiten',
+    work: 'Projekte',
     services: 'Services',
     process: 'Prozess',
     contact: 'Kontakt',
@@ -70,7 +70,7 @@ export const de = {
   
   // Work Section
   work: {
-    title: 'Meine Arbeiten',
+    title: 'Meine Projekte',
     subtitle: 'Eine Auswahl meiner neuesten Projekte',
     view_project: 'Projekt ansehen',
     close_modal: 'Schließen',
