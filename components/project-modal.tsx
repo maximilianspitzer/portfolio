@@ -114,7 +114,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <ImageCarousel 
                   images={project.images} 
                   alt={project.title}
-                  projectId={project.id}
                 />
               </div>
             )}

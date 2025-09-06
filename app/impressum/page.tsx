@@ -3,8 +3,8 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 
-export default function Impressum() {
-  const { dictionary } = useLanguage();
+export default function ImpressumPage() {
+  // const dictionary = getDictionary();
 
   const content = {
     de: {

@@ -1,18 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { trackPortfolioEvent } from '@/lib/analytics';
 
 interface ImageCarouselProps {
   images: string[];
   alt: string;
-  projectId?: string; // Optional project ID for tracking
 }
 
-export default function ImageCarousel({ images, alt, projectId }: ImageCarouselProps) {
+export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   const { dictionary } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToNext = useCallback(() => {
+    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  }, [currentIndex, images.length]);
+
+  const goToPrevious = useCallback(() => {
+    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  }, [currentIndex, images.length]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -28,17 +36,7 @@ export default function ImageCarousel({ images, alt, projectId }: ImageCarouselP
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex]);
-
-  const goToNext = () => {
-    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const goToPrevious = () => {
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  }, [goToNext, goToPrevious]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);

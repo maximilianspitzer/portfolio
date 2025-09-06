@@ -31,8 +31,22 @@ export function isCookielessMode(): boolean {
   return getAnalyticsConfig().cookieless;
 }
 
+// Umami Analytics Integration
+// https://umami.is/docs/tracker-functions
+
+// Type definition for Umami
+interface UmamiTracker {
+  track: (eventName: string, eventData?: Record<string, unknown>) => void;
+}
+
+declare global {
+  interface Window {
+    umami?: UmamiTracker;
+  }
+}
+
 // Load Umami analytics script
-export function loadUmamiScript(): Promise<void> {
+export function loadUmami(): Promise<void> {
   return new Promise((resolve, reject) => {
     const config = getAnalyticsConfig();
     
@@ -74,9 +88,9 @@ export function loadUmamiScript(): Promise<void> {
 }
 
 // Track custom events (optional)
-export function trackEvent(eventName: string, eventData?: Record<string, any>): void {
-  if (typeof window !== 'undefined' && (window as any).umami) {
-    (window as any).umami.track(eventName, eventData);
+export function trackEvent(eventName: string, eventData?: Record<string, unknown>): void {
+  if (typeof window !== 'undefined' && window.umami) {
+    window.umami.track(eventName, eventData);
   }
 }
 
@@ -177,6 +191,10 @@ export function clearAnalyticsConsent(): void {
   localStorage.removeItem(CONSENT_KEY);
 }
 
+export function loadUmamiScript(): Promise<void> {
+  return loadUmami();
+}
+
 // Initialize analytics based on configuration and consent
 export async function initializeAnalytics(): Promise<void> {
   const config = getAnalyticsConfig();
@@ -189,14 +207,14 @@ export async function initializeAnalytics(): Promise<void> {
   // If cookieless mode, load immediately
   if (config.cookieless) {
     console.log('Loading analytics in cookieless mode');
-    await loadUmamiScript();
+    await loadUmami();
     return;
   }
 
   // If consent-based mode, check for consent
   if (hasAnalyticsConsent()) {
     console.log('Loading analytics with user consent');
-    await loadUmamiScript();
+    await loadUmami();
   } else {
     console.log('Analytics consent not given, waiting for user action');
   }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { trackPortfolioEvent } from '@/lib/analytics';
 import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 
 export default function Services() {
