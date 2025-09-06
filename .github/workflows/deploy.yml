@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -38,11 +38,8 @@ jobs:
       - name: Run linting
         run: pnpm run lint
 
-      - name: Build application
-        run: pnpm run build
-
   docker-build-and-push:
-    needs: build-and-test
+    needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
