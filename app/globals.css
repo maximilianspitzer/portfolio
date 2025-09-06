@@ -34,9 +34,58 @@
     scroll-behavior: smooth;
   }
   
+  /* Respect user's reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  *:focus {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--foreground);
+    color: var(--background);
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+
+  .skip-to-content:focus {
+    top: 6px;
   }
 }
 
@@ -60,6 +109,22 @@
     -webkit-line-clamp: 2;
     line-clamp: 2;
   }
+
+  /* Button focus states */
+  .btn-focus {
+    @apply focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Card hover states with reduced motion support */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-hover {
+      @apply transition-none;
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -81,5 +146,30 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --muted: #f0f0f0;
+    --muted-foreground: #000000;
+    --border: #000000;
+    --accent: #f0f0f0;
+    --accent-foreground: #000000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+      --muted: #1a1a1a;
+      --muted-foreground: #ffffff;
+      --border: #ffffff;
+      --accent: #1a1a1a;
+      --accent-foreground: #ffffff;
+    }
   }
 }

@@ -99,5 +99,7 @@ export const en = {
     copyright: '© 2025 Maximilian Spitzer. All rights reserved.',
     github: 'GitHub',
     linkedin: 'LinkedIn',
+    impressum: 'Legal Notice',
+    datenschutz: 'Privacy Policy',
   },
 };
