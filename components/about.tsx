@@ -20,8 +20,8 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image placeholder */}
             <div className="order-2 lg:order-1">
-              <div className="aspect-square bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm">Profile Image</span>
+              <div className="aspect-square bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-lg flex items-center justify-center">
+                <span className="text-neutral-400 text-sm">Profile Image</span>
               </div>
             </div>
 

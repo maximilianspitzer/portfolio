@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={inter.variable}>
+    <html lang="de" className={`dark ${inter.variable}`}>
       <body className="font-sans antialiased">
         <LanguageProvider>
           <SkipToContent />

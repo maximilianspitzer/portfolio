@@ -48,8 +48,8 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
     <div className="relative group">
       {/* Main image display */}
       <div className="aspect-video bg-muted rounded-lg overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-          <span className="text-gray-500 text-sm">
+        <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
+          <span className="text-neutral-400 text-sm">
             {alt} - Image {currentIndex + 1}
           </span>
         </div>

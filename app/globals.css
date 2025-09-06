@@ -2,27 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Monochrome Design System Variables */
+/* Monochrome Design System Variables - Dark Mode Only */
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --border: #e5e5e5;
-  --accent: #f5f5f5;
-  --accent-foreground: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-    --muted: #0a0a0a;
-    --muted-foreground: #a3a3a3;
-    --border: #262626;
-    --accent: #171717;
-    --accent-foreground: #ffffff;
-  }
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: #0a0a0a;
+  --muted-foreground: #a3a3a3;
+  --border: #262626;
+  --accent: #171717;
+  --accent-foreground: #ffffff;
 }
 
 @layer base {
@@ -149,27 +137,15 @@
   }
 }
 
-/* High contrast mode support */
+/* High contrast mode support - Dark Mode Only */
 @media (prefers-contrast: high) {
   :root {
-    --background: #ffffff;
-    --foreground: #000000;
-    --muted: #f0f0f0;
-    --muted-foreground: #000000;
-    --border: #000000;
-    --accent: #f0f0f0;
-    --accent-foreground: #000000;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #000000;
-      --foreground: #ffffff;
-      --muted: #1a1a1a;
-      --muted-foreground: #ffffff;
-      --border: #ffffff;
-      --accent: #1a1a1a;
-      --accent-foreground: #ffffff;
-    }
+    --background: #000000;
+    --foreground: #ffffff;
+    --muted: #1a1a1a;
+    --muted-foreground: #ffffff;
+    --border: #ffffff;
+    --accent: #1a1a1a;
+    --accent-foreground: #ffffff;
   }
 }
