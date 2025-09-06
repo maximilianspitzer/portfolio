@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Project } from '@/content/projects';
+import { trackPortfolioEvent } from '@/lib/analytics';
 import ImageCarousel from './image-carousel';
 
 interface ProjectModalProps {
@@ -110,7 +111,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Image carousel */}
             {project.images.length > 0 && (
               <div className="mb-6">
-                <ImageCarousel images={project.images} alt={project.title} />
+                <ImageCarousel 
+                  images={project.images} 
+                  alt={project.title}
+                  projectId={project.id}
+                />
               </div>
             )}
 
@@ -147,6 +152,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackPortfolioEvent.projectLinkClick(project.id, 'live', project.liveUrl!)}
                     className="inline-flex items-center px-4 py-2 bg-foreground text-background rounded-md hover:bg-foreground/90 transition-colors"
                   >
                     View Live
@@ -160,6 +166,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackPortfolioEvent.projectLinkClick(project.id, 'github', project.githubUrl!)}
                     className="inline-flex items-center px-4 py-2 border border-border text-foreground rounded-md hover:bg-accent transition-colors"
                   >
                     View Code

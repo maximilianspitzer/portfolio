@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 export default function Header() {
   const { dictionary, language, setLanguage } = useLanguage();
@@ -8,6 +9,16 @@ export default function Header() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+    
+    // Track navigation click
+    trackPortfolioEvent.navigationClick(sectionId);
+  };
+
+  const handleLanguageChange = (newLanguage: 'de' | 'en') => {
+    setLanguage(newLanguage);
+    
+    // Track language change
+    trackPortfolioEvent.languageChange(newLanguage);
   };
 
   return (
@@ -56,7 +67,7 @@ export default function Header() {
           {/* Language toggle */}
           <div className="flex items-center space-x-1 bg-accent rounded-md p-1">
             <button
-              onClick={() => setLanguage('de')}
+              onClick={() => handleLanguageChange('de')}
               className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
                 language === 'de' 
                   ? 'bg-foreground text-background' 
@@ -66,7 +77,7 @@ export default function Header() {
               DE
             </button>
             <button
-              onClick={() => setLanguage('en')}
+              onClick={() => handleLanguageChange('en')}
               className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
                 language === 'en' 
                   ? 'bg-foreground text-background' 

@@ -1,12 +1,14 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 
 export default function Process() {
   const { dictionary } = useLanguage();
+  const sectionRef = useSectionTracking('process');
 
   return (
-    <section id="process" className="py-20 bg-background">
+    <section ref={sectionRef} id="process" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

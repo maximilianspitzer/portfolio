@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 interface ImageCarouselProps {
   images: string[];
   alt: string;
+  projectId?: string; // Optional project ID for tracking
 }
 
-export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
+export default function ImageCarousel({ images, alt, projectId }: ImageCarouselProps) {
   const { dictionary } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -29,19 +31,32 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   }, [currentIndex]);
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
+    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+    
+    // Track carousel navigation
+    if (projectId) {
+      trackPortfolioEvent.carouselNavigation(projectId, 'next', newIndex);
+    }
   };
 
   const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+    
+    // Track carousel navigation
+    if (projectId) {
+      trackPortfolioEvent.carouselNavigation(projectId, 'prev', newIndex);
+    }
   };
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+    
+    // Track carousel navigation
+    if (projectId) {
+      trackPortfolioEvent.carouselImageClick(projectId, index);
+    }
   };
 
   if (!images.length) return null;

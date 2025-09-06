@@ -1,12 +1,14 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 
 export default function About() {
   const { dictionary } = useLanguage();
+  const sectionRef = useSectionTracking('about');
 
   return (
-    <section id="about" className="py-20 bg-muted">
+    <section ref={sectionRef} id="about" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">

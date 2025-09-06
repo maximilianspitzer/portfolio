@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 export default function SkipToContent() {
   const { language } = useLanguage();
@@ -13,6 +14,9 @@ export default function SkipToContent() {
     if (main) {
       main.focus();
       main.scrollIntoView({ behavior: 'smooth' });
+      
+      // Track accessibility feature usage
+      trackPortfolioEvent.skipToContentUsed();
     }
   };
 

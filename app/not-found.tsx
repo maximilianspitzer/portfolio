@@ -1,10 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 export default function NotFound() {
   const { language } = useLanguage();
+
+  // Track 404 error
+  useEffect(() => {
+    const path = window.location.pathname;
+    const referrer = document.referrer || 'direct';
+    trackPortfolioEvent.error404(path, referrer);
+  }, []);
 
   const content = {
     de: {

@@ -10,6 +10,7 @@ import {
   setAnalyticsConsent,
   loadUmamiScript 
 } from '@/lib/analytics';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 export default function ConsentBanner() {
   const { language } = useLanguage();
@@ -43,6 +44,9 @@ export default function ConsentBanner() {
     setIsLoading(true);
     setAnalyticsConsent(true);
     
+    // Track consent decision
+    trackPortfolioEvent.cookieConsentAccepted();
+    
     try {
       await loadUmamiScript();
       console.log('Analytics enabled with user consent');
@@ -56,6 +60,10 @@ export default function ConsentBanner() {
 
   const handleDecline = () => {
     setAnalyticsConsent(false);
+    
+    // Track consent decision
+    trackPortfolioEvent.cookieConsentDeclined();
+    
     setShowBanner(false);
   };
 

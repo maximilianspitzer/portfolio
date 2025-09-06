@@ -1,12 +1,19 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
+import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 
 export default function Services() {
   const { dictionary } = useLanguage();
+  const sectionRef = useSectionTracking('services');
+
+  const handleServiceClick = (serviceName: string) => {
+    trackPortfolioEvent.serviceClick(serviceName);
+  };
 
   return (
-    <section id="services" className="py-20 bg-muted">
+    <section ref={sectionRef} id="services" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -21,7 +28,8 @@ export default function Services() {
           {dictionary.services.items.map((service, index) => (
             <div
               key={index}
-              className="bg-background p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group"
+              onClick={() => handleServiceClick(service.title)}
+              className="bg-background p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group cursor-pointer"
             >
               <div className="mb-4">
                 <div className="w-12 h-12 bg-foreground rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

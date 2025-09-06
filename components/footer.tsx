@@ -2,9 +2,18 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackPortfolioEvent } from '@/lib/analytics';
 
 export default function Footer() {
   const { dictionary } = useLanguage();
+
+  const handleSocialClick = (platform: string, url: string) => {
+    trackPortfolioEvent.socialLinkClick(platform, url, 'footer');
+  };
+
+  const handleLegalClick = (page: 'impressum' | 'datenschutz') => {
+    trackPortfolioEvent.legalPageView(page);
+  };
 
   return (
     <footer className="border-t bg-background">
@@ -19,6 +28,7 @@ export default function Footer() {
             <div className="flex items-center gap-4 text-sm">
               <Link
                 href="/impressum"
+                onClick={() => handleLegalClick('impressum')}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 {dictionary.footer.impressum}
@@ -26,6 +36,7 @@ export default function Footer() {
               <span className="text-muted-foreground/50">•</span>
               <Link
                 href="/datenschutz"
+                onClick={() => handleLegalClick('datenschutz')}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 {dictionary.footer.datenschutz}
@@ -39,6 +50,7 @@ export default function Footer() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => handleSocialClick('GitHub', 'https://github.com')}
               className="text-muted-foreground hover:text-foreground transition-colors btn-focus"
               aria-label={dictionary.footer.github}
             >
@@ -60,6 +72,7 @@ export default function Footer() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => handleSocialClick('LinkedIn', 'https://linkedin.com')}
               className="text-muted-foreground hover:text-foreground transition-colors btn-focus"
               aria-label={dictionary.footer.linkedin}
             >

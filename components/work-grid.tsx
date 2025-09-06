@@ -3,22 +3,33 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { projects, Project } from '@/content/projects';
+import { trackPortfolioEvent } from '@/lib/analytics';
+import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 import ProjectModal from './project-modal';
 
 export default function WorkGrid() {
   const { dictionary } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const sectionRef = useSectionTracking('work');
 
   const openModal = (project: Project) => {
     setSelectedProject(project);
+    
+    // Track project view and modal open
+    trackPortfolioEvent.projectView(project.id, project.title);
+    trackPortfolioEvent.projectModalOpen(project.id, project.title);
   };
 
   const closeModal = () => {
+    if (selectedProject) {
+      // Track modal close
+      trackPortfolioEvent.projectModalClose(selectedProject.id, selectedProject.title);
+    }
     setSelectedProject(null);
   };
 
   return (
-    <section id="work" className="py-20 bg-background">
+    <section ref={sectionRef} id="work" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
