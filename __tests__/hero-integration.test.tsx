@@ -27,6 +27,7 @@ vi.mock('@/hooks/useAnalyticsTracking', () => ({
 vi.mock('@/lib/analytics', () => ({
   trackPortfolioEvent: {
     heroCtaClick: vi.fn(),
+    custom: vi.fn(),
   },
 }));
 
@@ -140,10 +141,10 @@ describe('Hero Component Integration', () => {
       );
       expect(screen.getByText('Test Subhead')).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'View Work' })
+        screen.getByRole('button', { name: 'View Work - View portfolio work' })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Get in Touch' })
+        screen.getByRole('button', { name: 'Get in Touch - Contact information' })
       ).toBeInTheDocument();
     });
 
@@ -152,28 +153,36 @@ describe('Hero Component Integration', () => {
 
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading).toHaveTextContent('Test Headline');
-      expect(heading).toHaveClass('text-4xl', 'md:text-6xl', 'lg:text-7xl');
+      expect(heading).toHaveClass('font-bold', 'text-foreground', 'mb-6', 'animate-fade-in');
+      expect(heading).toHaveStyle('font-size: clamp(2rem, 8vw, 4.5rem)');
     });
 
     it('should have proper button styling and accessibility', () => {
       render(<Hero />);
 
-      const primaryButton = screen.getByRole('button', { name: 'View Work' });
+      const primaryButton = screen.getByRole('button', { name: 'View Work - View portfolio work' });
       const secondaryButton = screen.getByRole('button', {
-        name: 'Get in Touch',
+        name: 'Get in Touch - Contact information',
       });
 
       expect(primaryButton).toHaveClass(
-        'px-8',
+        'px-6',
+        'sm:px-8',
         'py-3',
         'bg-foreground',
-        'text-background'
+        'text-background',
+        'font-medium',
+        'rounded-md',
+        'transition-all',
+        'hover:scale-105'
       );
       expect(secondaryButton).toHaveClass(
-        'px-8',
+        'px-6',
+        'sm:px-8',
         'py-3',
         'border',
-        'border-border'
+        'border-border',
+        'text-foreground'
       );
     });
   });
@@ -188,7 +197,7 @@ describe('Hero Component Integration', () => {
 
       render(<Hero />);
 
-      const primaryButton = screen.getByRole('button', { name: 'View Work' });
+      const primaryButton = screen.getByRole('button', { name: 'View Work - View portfolio work' });
       fireEvent.click(primaryButton);
 
       expect(document.getElementById).toHaveBeenCalledWith('work');
@@ -206,7 +215,7 @@ describe('Hero Component Integration', () => {
       render(<Hero />);
 
       const secondaryButton = screen.getByRole('button', {
-        name: 'Get in Touch',
+        name: 'Get in Touch - Contact information',
       });
       fireEvent.click(secondaryButton);
 
@@ -232,7 +241,7 @@ describe('Hero Component Integration', () => {
       render(<Hero />);
 
       // Test primary CTA
-      const primaryButton = screen.getByRole('button', { name: 'View Work' });
+      const primaryButton = screen.getByRole('button', { name: 'View Work - View portfolio work' });
       fireEvent.click(primaryButton);
       expect(trackPortfolioEvent.heroCtaClick).toHaveBeenCalledWith(
         'view_work'
@@ -240,7 +249,7 @@ describe('Hero Component Integration', () => {
 
       // Test secondary CTA
       const secondaryButton = screen.getByRole('button', {
-        name: 'Get in Touch',
+        name: 'Get in Touch - Contact information',
       });
       fireEvent.click(secondaryButton);
       expect(trackPortfolioEvent.heroCtaClick).toHaveBeenCalledWith('contact');
@@ -268,7 +277,7 @@ describe('Hero Component Integration', () => {
       expect(screen.getByTestId('particles-background')).toBeInTheDocument();
 
       // But buttons should still be clickable
-      const primaryButton = screen.getByRole('button', { name: 'View Work' });
+      const primaryButton = screen.getByRole('button', { name: 'View Work - View portfolio work' });
       fireEvent.click(primaryButton);
 
       expect(mockElement.scrollIntoView).toHaveBeenCalled();
@@ -309,10 +318,12 @@ describe('Hero Component Integration', () => {
       render(<Hero />);
 
       const heading = screen.getByRole('heading', { level: 1 });
-      expect(heading).toHaveClass('text-4xl', 'md:text-6xl', 'lg:text-7xl');
+      expect(heading).toHaveClass('font-bold', 'text-foreground', 'mb-6', 'animate-fade-in');
+      expect(heading).toHaveStyle('font-size: clamp(2rem, 8vw, 4.5rem)');
 
       const subhead = screen.getByText('Test Subhead');
-      expect(subhead).toHaveClass('text-lg', 'md:text-xl');
+      expect(subhead).toHaveClass('text-muted-foreground', 'mb-8', 'max-w-2xl', 'mx-auto', 'animate-fade-in-delay');
+      expect(subhead).toHaveStyle('font-size: clamp(1rem, 3vw, 1.25rem)');
     });
   });
 
@@ -325,10 +336,10 @@ describe('Hero Component Integration', () => {
 
       // Should have interactive buttons
       expect(
-        screen.getByRole('button', { name: 'View Work' })
+        screen.getByRole('button', { name: 'View Work - View portfolio work' })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Get in Touch' })
+        screen.getByRole('button', { name: 'Get in Touch - Contact information' })
       ).toBeInTheDocument();
     });
 
@@ -375,7 +386,7 @@ describe('Hero Component Integration', () => {
     it('should have hover effects on buttons', () => {
       render(<Hero />);
 
-      const primaryButton = screen.getByRole('button', { name: 'View Work' });
+      const primaryButton = screen.getByRole('button', { name: 'View Work - View portfolio work' });
       expect(primaryButton).toHaveClass(
         'hover:bg-foreground/90',
         'transition-all',
@@ -383,7 +394,7 @@ describe('Hero Component Integration', () => {
       );
 
       const secondaryButton = screen.getByRole('button', {
-        name: 'Get in Touch',
+        name: 'Get in Touch - Contact information',
       });
       expect(secondaryButton).toHaveClass(
         'hover:bg-accent',

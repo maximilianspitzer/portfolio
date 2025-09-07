@@ -28,6 +28,7 @@ vi.mock('@/hooks/useAnalyticsTracking', () => ({
 vi.mock('@/lib/analytics', () => ({
   trackPortfolioEvent: {
     heroCtaClick: vi.fn(),
+    custom: vi.fn(),
   },
 }));
 
@@ -60,6 +61,13 @@ vi.mock('@/lib/particles-config', () => ({
       getFinalConfig: () => ({
         particles: { number: { value: 60 } },
         interactivity: { events: { onHover: { enable: true } } },
+      }),
+      getBreakpointOptimizedConfig: (breakpoint: string) => ({
+        particles: {
+          number: { value: breakpoint === 'xs' ? 15 : breakpoint === 'sm' ? 20 : 50 },
+          move: { enable: true, speed: 1 },
+        },
+        fpsLimit: 60,
       }),
     }),
   },
@@ -134,10 +142,10 @@ describe('Hero Section Container Positioning Tests', () => {
 
       // Buttons should be present and accessible
       expect(
-        screen.getByRole('button', { name: 'View Work' })
+        screen.getByRole('button', { name: 'View Work - View portfolio work' })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: 'Get in Touch' })
+        screen.getByRole('button', { name: 'Get in Touch - Contact information' })
       ).toBeInTheDocument();
     });
   });

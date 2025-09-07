@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
 
 // Import responsive testing utilities and extend matchers
 import { 
@@ -19,45 +18,19 @@ expect.extend({
   ...performanceMatchers,
 });
 
-// Ensure HTMLElement is available before setting up prototype methods
-if (typeof global.HTMLElement === 'undefined') {
-  global.HTMLElement = class HTMLElement {
-    scrollIntoView = vi.fn();
-  } as any;
-}
-
-// Mock scrollIntoView for HTMLElement prototype
-if (global.HTMLElement && global.HTMLElement.prototype) {
-  Object.defineProperty(global.HTMLElement.prototype, 'scrollIntoView', {
-    configurable: true,
-    writable: true,
-    value: vi.fn(),
-  });
-}
-
 // Mock matchMedia with responsive testing support
-const mockMatchMedia = vi.fn().mockImplementation((query) => ({
-  matches: false,
-  media: query,
-  onchange: null,
-  addListener: vi.fn(), // deprecated
-  removeListener: vi.fn(), // deprecated
-  addEventListener: vi.fn(),
-  removeEventListener: vi.fn(),
-  dispatchEvent: vi.fn(),
-}));
-
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  configurable: true,
-  value: mockMatchMedia,
-});
-
-// Make matchMedia available globally
-Object.defineProperty(global, 'matchMedia', {
-  writable: true,
-  configurable: true,
-  value: mockMatchMedia,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
 });
 
 // Mock performance.memory for testing
@@ -140,67 +113,22 @@ Object.defineProperty(global, 'TouchEvent', {
 });
 
 // Mock navigator for device capability testing
-const mockNavigator = {
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
-  hardwareConcurrency: 4,
-  deviceMemory: 8,
-  maxTouchPoints: 0,
-  connection: {
-    effectiveType: '4g',
-    downlink: 10,
-    rtt: 50,
-  },
-  clipboard: {
-    writeText: vi.fn().mockResolvedValue(undefined),
-    readText: vi.fn().mockResolvedValue(''),
-  },
-  platform: 'MacIntel',
-  language: 'en-US',
-  languages: ['en-US', 'en'],
-  onLine: true,
-  cookieEnabled: true,
-};
-
-Object.defineProperty(global, 'navigator', {
-  writable: true,
-  value: mockNavigator,
-});
-
 Object.defineProperty(navigator, 'hardwareConcurrency', {
   writable: true,
-  configurable: true,
   value: 4,
 });
 
 Object.defineProperty(navigator, 'deviceMemory', {
   writable: true,
-  configurable: true,
   value: 8,
-});
-
-Object.defineProperty(navigator, 'maxTouchPoints', {
-  writable: true,
-  configurable: true,
-  value: 0,
 });
 
 Object.defineProperty(navigator, 'connection', {
   writable: true,
-  configurable: true,
   value: {
     effectiveType: '4g',
     downlink: 10,
     rtt: 50,
-  },
-});
-
-// Mock clipboard API for container query tests
-Object.defineProperty(navigator, 'clipboard', {
-  writable: true,
-  configurable: true,
-  value: {
-    writeText: vi.fn().mockResolvedValue(undefined),
-    readText: vi.fn().mockResolvedValue(''),
   },
 });
 
@@ -292,7 +220,6 @@ Element.prototype.getBoundingClientRect = vi.fn().mockImplementation(() => ({
 // Mock clipboard API for container query tests
 Object.defineProperty(navigator, 'clipboard', {
   writable: true,
-  configurable: true,
   value: {
     writeText: vi.fn().mockResolvedValue(undefined),
     readText: vi.fn().mockResolvedValue(''),
@@ -300,68 +227,198 @@ Object.defineProperty(navigator, 'clipboard', {
 });
 
 // Add global vi function for test files
-(global as any).vi = vi;
+global.vi = vi;
 
-// Ensure window object is available globally
-if (typeof global.window === 'undefined') {
-  (global as any).window = {};
-}
+// Global analytics mock to ensure all tests have access to properly mocked analytics
+// Global analytics mock
+vi.mock('@/lib/analytics', () => ({
+  trackPortfolioEvent: {
+    hero_cta_click: vi.fn(),
+    hero_section_view: vi.fn(),
+    work_grid_view: vi.fn(),
+    work_grid_project_open: vi.fn(),
+    project_modal_close: vi.fn(),
+    contact_section_view: vi.fn(),
+    about_section_view: vi.fn(),
+    newsletter_signup: vi.fn(),
+    social_link_click: vi.fn(),
+    error_boundary_triggered: vi.fn(),
+    scroll_to_section: vi.fn(),
+    responsive_breakpoint_change: vi.fn(),
+    custom: vi.fn(),
+  },
+  initializeAnalytics: vi.fn(),
+  isAnalyticsEnabled: vi.fn(() => true),
+}));
 
-// Define comprehensive window object for browser APIs
+// Global particles configuration mock
+vi.mock('@/lib/particles-config', () => ({
+  ParticlesConfigurationManager: {
+    getInstance: vi.fn(() => ({
+      getThemeAwareColors: vi.fn(() => ({
+        particle: '#ffffff',
+        links: 'rgba(163, 163, 163, 0.2)',
+        background: 'transparent',
+        hover: 'rgba(255, 255, 255, 0.1)',
+      })),
+      getBaseConfig: vi.fn(() => ({
+        fullScreen: { enable: false, zIndex: 0 },
+        background: { color: { value: 'transparent' }, opacity: 0 },
+        fpsLimit: 60,
+        detectRetina: true,
+        pauseOnBlur: true,
+        particles: {
+          color: { value: '#ffffff' },
+          links: {
+            color: 'rgba(163, 163, 163, 0.2)',
+            distance: 150,
+            enable: true,
+            opacity: 0.3,
+            width: 1,
+            triangles: { enable: true, opacity: 0.015 },
+          },
+          move: {
+            direction: 'none',
+            enable: true,
+            outModes: { default: 'bounce' },
+            random: false,
+            speed: 1,
+            straight: false,
+          },
+          number: {
+            density: { enable: true, width: 1920, height: 1080 },
+            value: 100,
+          },
+          opacity: { value: 0.6 },
+          shape: { type: 'circle' },
+          size: { value: { min: 2, max: 4 } },
+        },
+        interactivity: {
+          detectsOn: 'canvas',
+          events: {
+            onHover: { enable: true, mode: 'repulse' },
+            onClick: { enable: true, mode: 'push' },
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { groups: [], quantity: 2 },
+          },
+        },
+      })),
+      getResponsiveConfig: vi.fn(() => [
+        {
+          minWidth: 1200,
+          options: {
+            particles: {
+              number: { value: 100, density: { enable: true, width: 1920, height: 1080 } },
+              links: { distance: 150, opacity: 0.3 },
+              move: { enable: true, speed: 2 },
+              size: { value: { min: 3, max: 5 } },
+            },
+            fpsLimit: 60,
+          },
+        },
+        {
+          minWidth: 1024,
+          maxWidth: 1199,
+          options: {
+            particles: {
+              number: { value: 80, density: { enable: true, width: 1200, height: 900 } },
+              links: { distance: 140, opacity: 0.25 },
+              move: { enable: true, speed: 1.5 },
+              size: { value: { min: 2, max: 4 } },
+            },
+            fpsLimit: 60,
+          },
+        },
+        {
+          minWidth: 768,
+          maxWidth: 1023,
+          options: {
+            particles: {
+              number: { value: 50, density: { enable: true, width: 1024, height: 768 } },
+              links: { distance: 120, opacity: 0.2 },
+              move: { enable: true, speed: 1 },
+              size: { value: { min: 2, max: 3 } },
+            },
+            fpsLimit: 45,
+            interactivity: {
+              events: { onHover: { enable: true, mode: 'repulse' } },
+              modes: { repulse: { distance: 80, duration: 0.3 } },
+            },
+          },
+        },
+        {
+          minWidth: 640,
+          maxWidth: 767,
+          options: {
+            particles: {
+              number: { value: 30, density: { enable: true, width: 800, height: 600 } },
+              links: { distance: 100, opacity: 0.15 },
+              move: { enable: true, speed: 0.8 },
+              size: { value: { min: 1, max: 2 } },
+            },
+            fpsLimit: 30,
+            interactivity: {
+              events: { onHover: { enable: false }, onClick: { enable: true, mode: 'push' } },
+              modes: { push: { quantity: 1 } },
+            },
+          },
+        },
+        {
+          maxWidth: 639,
+          options: {
+            particles: {
+              number: { value: 20, density: { enable: true, width: 400, height: 600 } },
+              links: { distance: 80, opacity: 0.1 },
+              move: { enable: true, speed: 0.5 },
+              size: { value: { min: 1, max: 2 } },
+            },
+            fpsLimit: 24,
+            interactivity: {
+              events: { onHover: { enable: false }, onClick: { enable: false } },
+            },
+          },
+        },
+      ]),
+      getAccessibilityConfig: vi.fn(() => ({})),
+      getPerformanceConfig: vi.fn(() => ({})),
+      getFinalConfig: vi.fn(() => ({
+        fullScreen: { enable: false, zIndex: 0 },
+        particles: { number: { value: 100 } },
+        fpsLimit: 60,
+        responsive: [],
+      })),
+      getBreakpointOptimizedConfig: vi.fn((breakpoint) => ({
+        fullScreen: { enable: false, zIndex: 0 },
+        particles: {
+          number: { value: breakpoint === 'xs' ? 15 : breakpoint === 'sm' ? 20 : 50 },
+          move: { enable: true, speed: 1 },
+        },
+        fpsLimit: 60,
+      })),
+      getTestConfig: vi.fn(() => ({
+        particles: { number: { value: 5 } },
+        fpsLimit: 1,
+        interactivity: {
+          events: { onHover: { enable: false }, onClick: { enable: false } },
+        },
+      })),
+    })),
+  },
+}));
+
+// Define window globally for browser APIs
 Object.defineProperty(global, 'window', {
   writable: true,
-  configurable: true,
   value: {
     ...window,
-    navigator: mockNavigator,
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-    getComputedStyle: vi.fn().mockReturnValue({
-      getPropertyValue: vi.fn().mockReturnValue(''),
-    }),
-    document: document,
-    screen: {
-      width: 1024,
-      height: 768,
+    navigator: {
+      ...navigator,
+      clipboard: {
+        writeText: vi.fn().mockResolvedValue(undefined),
+        readText: vi.fn().mockResolvedValue(''),
+      },
     },
-    innerWidth: 1024,
-    innerHeight: 768,
-    devicePixelRatio: 1,
-    location: {
-      href: 'http://localhost:3000',
-      origin: 'http://localhost:3000',
-    },
-    matchMedia: mockMatchMedia,
-    requestAnimationFrame: vi.fn().mockImplementation((callback) => {
-      return setTimeout(callback, 16);
-    }),
-    cancelAnimationFrame: vi.fn().mockImplementation((id) => {
-      clearTimeout(id);
-    }),
   },
-});
-
-// Ensure window.window points to itself (some libraries check this)
-if (global.window) {
-  global.window.window = global.window;
-}
-
-// Also ensure the window is available on the global object
-Object.defineProperty(window, 'addEventListener', {
-  writable: true,
-  configurable: true,
-  value: vi.fn(),
-});
-
-Object.defineProperty(window, 'removeEventListener', {
-  writable: true,
-  configurable: true,
-  value: vi.fn(),
-});
-
-Object.defineProperty(window, 'dispatchEvent', {
-  writable: true,
-  configurable: true,
-  value: vi.fn(),
 });

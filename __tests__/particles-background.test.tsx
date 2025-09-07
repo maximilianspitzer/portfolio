@@ -27,6 +27,13 @@ vi.mock('@/lib/particles-config', () => ({
         particles: { number: { value: 60 } },
         interactivity: { events: { onHover: { enable: true } } },
       }),
+      getBreakpointOptimizedConfig: (breakpoint: string) => ({
+        particles: {
+          number: { value: breakpoint === 'xs' ? 15 : breakpoint === 'sm' ? 20 : 50 },
+          move: { enable: true, speed: 1 },
+        },
+        fpsLimit: 60,
+      }),
     }),
   },
 }));
