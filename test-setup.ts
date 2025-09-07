@@ -132,6 +132,12 @@ Object.defineProperty(navigator, 'connection', {
   },
 });
 
+// Mock maxTouchPoints for touch device testing
+Object.defineProperty(navigator, 'maxTouchPoints', {
+  writable: true,
+  value: 0,
+});
+
 // Mock CSS.supports for container query testing
 Object.defineProperty(global, 'CSS', {
   writable: true,
@@ -225,9 +231,6 @@ Object.defineProperty(navigator, 'clipboard', {
     readText: vi.fn().mockResolvedValue(''),
   },
 });
-
-// Add global vi function for test files
-global.vi = vi;
 
 // Global analytics mock to ensure all tests have access to properly mocked analytics
 // Global analytics mock
@@ -408,16 +411,31 @@ vi.mock('@/lib/particles-config', () => ({
   },
 }));
 
-// Define window globally for browser APIs
+// Define window globally for browser APIs with comprehensive browser environment
 Object.defineProperty(global, 'window', {
   writable: true,
   value: {
     ...window,
+    innerWidth: 1024,
+    innerHeight: 768,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+    requestAnimationFrame: vi.fn().mockImplementation((callback) => setTimeout(callback, 16)),
+    cancelAnimationFrame: vi.fn().mockImplementation((id) => clearTimeout(id)),
     navigator: {
       ...navigator,
+      maxTouchPoints: 0,
+      hardwareConcurrency: 4,
+      deviceMemory: 8,
       clipboard: {
         writeText: vi.fn().mockResolvedValue(undefined),
         readText: vi.fn().mockResolvedValue(''),
+      },
+      connection: {
+        effectiveType: '4g',
+        downlink: 10,
+        rtt: 50,
       },
     },
   },
