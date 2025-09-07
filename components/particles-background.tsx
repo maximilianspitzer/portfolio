@@ -26,7 +26,7 @@ import type { ParticlesBackgroundProps } from '@/types/particles';
 export default function ParticlesBackground({
   className = '',
   id = 'particles-background',
-  reducedMotion,
+  reducedMotion: reducedMotionProp,
 }: ParticlesBackgroundProps) {
   const [init, setInit] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +37,7 @@ export default function ParticlesBackground({
   const { isMobile } = deviceInfo;
   
   // Performance optimization flags
-  const shouldReduceMotion = reducedMotion ?? prefersReducedMotion();
+  const shouldReduceMotion = reducedMotionProp ?? prefersReducedMotion();
   const isLowPowered = isLowPoweredDevice();
   const shouldOptimizeForPerformance = isMobile || isLowPowered;
 

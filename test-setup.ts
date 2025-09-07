@@ -216,3 +216,30 @@ Element.prototype.getBoundingClientRect = vi.fn().mockImplementation(() => ({
   y: 0,
   toJSON: () => {},
 }));
+
+// Mock clipboard API for container query tests
+Object.defineProperty(navigator, 'clipboard', {
+  writable: true,
+  value: {
+    writeText: vi.fn().mockResolvedValue(undefined),
+    readText: vi.fn().mockResolvedValue(''),
+  },
+});
+
+// Add global vi function for test files
+global.vi = vi;
+
+// Define window globally for browser APIs
+Object.defineProperty(global, 'window', {
+  writable: true,
+  value: {
+    ...window,
+    navigator: {
+      ...navigator,
+      clipboard: {
+        writeText: vi.fn().mockResolvedValue(undefined),
+        readText: vi.fn().mockResolvedValue(''),
+      },
+    },
+  },
+});

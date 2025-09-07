@@ -351,8 +351,8 @@ describe('useResponsive Hooks', () => {
 
   describe('SSR Support', () => {
     it('should handle server-side rendering', () => {
-      // @ts-expect-error Testing SSR scenario
       const originalWindow = global.window;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       global.window = undefined as any;
 
       const { result } = renderHook(() => useResponsive());
@@ -368,8 +368,8 @@ describe('useResponsive Hooks', () => {
 
     it('should hydrate correctly after SSR', () => {
       // First render without window (SSR)
-      // @ts-expect-error Testing SSR scenario
       const originalWindow = global.window;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       global.window = undefined as any;
       const { result, rerender } = renderHook(() => useResponsive());
 
@@ -435,8 +435,8 @@ describe('useResponsive Hooks', () => {
     });
 
     it('should handle invalid navigator properties', () => {
-      // @ts-expect-error Testing invalid navigator
       const originalNavigator = global.navigator;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       global.navigator = undefined as any;
 
       const { result } = renderHook(() => useDeviceInfo());

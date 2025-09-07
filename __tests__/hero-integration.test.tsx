@@ -32,11 +32,12 @@ vi.mock('@/lib/analytics', () => ({
 
 // Mock ParticlesBackground component
 vi.mock('@/components/particles-background', () => ({
-  default: ({ className = '', ...props }: Record<string, unknown>) => (
+  default: ({ className = '', reducedMotion, ...props }: { className?: string; reducedMotion?: boolean; [key: string]: unknown }) => (
     <div
       data-testid="particles-background"
       className={`particles-mock ${className}`}
-      {...props}
+      data-reduced-motion={reducedMotion}
+      {...(props as Record<string, unknown>)}
     >
       Particles Background Mock
     </div>
@@ -69,6 +70,15 @@ describe('Hero Component Integration', () => {
     // Mock console methods
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     vi.spyOn(console, 'debug').mockImplementation(() => {});
+    
+    // Mock clipboard API for container query tests
+    Object.defineProperty(navigator, 'clipboard', {
+      writable: true,
+      value: {
+        writeText: vi.fn(),
+        readText: vi.fn(),
+      },
+    });
   });
 
   afterEach(() => {

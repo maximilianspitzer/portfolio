@@ -192,7 +192,7 @@
   /* Mobile-specific card interactions */
   @media (hover: none) and (pointer: coarse) {
     .card-hover {
-      @apply active:scale-98 active:opacity-90;
+      @apply active:scale-95 active:opacity-90;
     }
   }
 
