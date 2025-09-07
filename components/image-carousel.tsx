@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ImageCarouselProps {
@@ -48,11 +49,14 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
     <div className="relative group">
       {/* Main image display */}
       <div className="aspect-video bg-muted rounded-lg overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
-          <span className="text-neutral-400 text-sm">
-            {alt} - Image {currentIndex + 1}
-          </span>
-        </div>
+        <Image
+          src={images[currentIndex]}
+          alt={`${alt} - Image ${currentIndex + 1}`}
+          width={800}
+          height={450}
+          className="w-full h-full object-cover"
+          priority={currentIndex === 0}
+        />
       </div>
 
       {/* Navigation arrows */}

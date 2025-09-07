@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { projects, Project } from '@/content/projects';
 import { trackPortfolioEvent } from '@/lib/analytics';
@@ -57,11 +58,13 @@ export default function WorkGrid() {
               onClick={() => openModal(project)}
             >
               <div className="aspect-video bg-muted relative overflow-hidden">
-                {project.images[0] && (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Project Image</span>
-                  </div>
-                )}
+                <Image
+                  src={project.previewImage}
+                  alt={getProjectText(project.titleKey)}
+                  width={400}
+                  height={225}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
               </div>
               

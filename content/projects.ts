@@ -5,6 +5,7 @@ export interface Project {
   longDescriptionKey: string;
   technologies: string[];
   images: string[];
+  previewImage: string;
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
@@ -22,6 +23,7 @@ export const projects: Project[] = [
       '/images/lumeo/pricing.png',
       '/images/lumeo/trust.png',
     ],
+    previewImage: '/images/lumeo/preview.png',
     featured: true,
   },
   {
@@ -31,10 +33,10 @@ export const projects: Project[] = [
     longDescriptionKey: 'projects.coolasfuck-tools.longDescription',
     technologies: ['Next.js', 'React', 'Tailwind CSS'],
     images: [
-      '/images/caf/hero.jpg',
-      '/images/caf/cards.jpg',
-      '/images/caf/filters.jpg',
+      '/images/caf/hero.png',
+      '/images/caf/cards.png',
     ],
+    previewImage: '/images/caf/preview.png',
     liveUrl: 'https://coolasfuck.tools',
     featured: true,
   },
@@ -43,12 +45,12 @@ export const projects: Project[] = [
     titleKey: 'projects.mxp-bio.title',
     descriptionKey: 'projects.mxp-bio.description',
     longDescriptionKey: 'projects.mxp-bio.longDescription',
-    technologies: ['Next.js', 'React', 'Tailwind CSS'],
+    technologies: ['Next.js', 'Typescript', 'Docker'],
     images: [
-      '/images/mxpbio/hero.jpg',
-      '/images/mxpbio/detail.jpg',
-      '/images/mxpbio/theme.jpg',
+      '/images/mxpbio/hero.png',
+      '/images/mxpbio/detail.png',
     ],
+    previewImage: '/images/mxpbio/preview.png',
     liveUrl: 'https://mxp.bio',
     featured: true,
   },
@@ -57,12 +59,13 @@ export const projects: Project[] = [
     titleKey: 'projects.portfolio-site.title',
     descriptionKey: 'projects.portfolio-site.description',
     longDescriptionKey: 'projects.portfolio-site.longDescription',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Unraid', 'Umami'],
+    technologies: ['Docker', 'TypeScript', 'Next.js', 'Unraid', 'Umami'],
     images: [
       '/images/portfolio/hero.png',
       '/images/portfolio/work.png',
       '/images/portfolio/about.png',
     ],
+    previewImage: '/images/portfolio/preview.png',
     liveUrl: 'https://maximilianspitzer.de',
     featured: true,
   },
