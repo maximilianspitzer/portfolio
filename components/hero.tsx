@@ -34,7 +34,7 @@ export default function Hero() {
       <ParticlesBackground />
       
       {/* Content Layer */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-4 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in">
             {dictionary.hero.headline}
@@ -47,14 +47,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
             <button
               onClick={handlePrimaryCTA}
-              className="px-8 py-3 bg-foreground text-background rounded-md font-medium hover:bg-foreground/90 transition-all duration-200 hover:scale-105"
+              className="px-8 py-3 bg-foreground text-background rounded-md font-medium hover:bg-foreground/90 transition-all duration-200 hover:scale-105 pointer-events-auto"
             >
               {dictionary.hero.cta_primary}
             </button>
             
             <button
               onClick={handleSecondaryCTA}
-              className="px-8 py-3 border border-border text-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 hover:scale-105"
+              className="px-8 py-3 border border-border text-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 hover:scale-105 pointer-events-auto"
             >
               {dictionary.hero.cta_secondary}
             </button>

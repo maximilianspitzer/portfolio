@@ -3,7 +3,7 @@
  * Handles particle system configuration with theme integration, accessibility, and responsive design
  */
 
-import type { ISourceOptions } from '@tsparticles/engine';
+import { Opacity, type ISourceOptions } from '@tsparticles/engine';
 import type { ResponsiveOption, ThemeColors } from '@/types/particles';
 import { group } from 'console';
 
@@ -81,6 +81,10 @@ export class ParticlesConfigurationManager {
           enable: true,
           opacity: 0.3,
           width: 1,
+          triangles: {
+            enable: true,
+            opacity: 0.015,
+          },
         },
         move: {
           direction: "none",
@@ -98,7 +102,7 @@ export class ParticlesConfigurationManager {
             width: 1920,
             height: 1080,
           },
-          value: 60,
+          value: 100,
         },
         opacity: {
           value: 0.6,
