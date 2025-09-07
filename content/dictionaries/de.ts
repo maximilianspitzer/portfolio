@@ -10,7 +10,7 @@ export const de = {
   
   // Hero Section
   hero: {
-    headline: 'Digitale Lösungen die begeistern',
+    headline: 'Digitale Lösungen die begeistern.',
     subhead: 'Ich entwickle moderne Webanwendungen und digitale Erlebnisse, die Ihre Ziele erreichen und Ihre Nutzer inspirieren.',
     cta_primary: 'Projekte ansehen',
     cta_secondary: 'Kontakt aufnehmen',
@@ -81,9 +81,7 @@ export const de = {
   // About Section
   about: {
     title: 'Über mich',
-    content: `Hallo! Ich bin Maximilian Spitzer, ein leidenschaftlicher Webentwickler mit Fokus auf moderne Frontend-Technologien. 
-    
-    Mit mehrjähriger Erfahrung in der Entwicklung von Webanwendungen helfe ich Unternehmen dabei, ihre digitalen Ziele zu erreichen. Mein Schwerpunkt liegt auf React, Next.js und TypeScript.`,
+    content: `Hallo! Ich bin Maximilian Spitzer, ein leidenschaftlicher Webentwickler mit einer starken Expertise in Python und guten Kenntnissen in Next.js, JavaScript und TypeScript. Mit mehrjähriger Erfahrung in der Entwicklung von Webanwendungen helfe ich Unternehmen dabei, ihre digitalen Ziele zu erreichen.`,
   },
   
   // Contact Section

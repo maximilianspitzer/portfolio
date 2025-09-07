@@ -10,7 +10,7 @@ export const en = {
   
   // Hero Section
   hero: {
-    headline: 'Digital solutions that inspire',
+    headline: 'Digital solutions that inspire.',
     subhead: 'I develop modern web applications and digital experiences that achieve your goals and inspire your users.',
     cta_primary: 'View projects',
     cta_secondary: 'Get in touch',
@@ -81,9 +81,7 @@ export const en = {
   // About Section
   about: {
     title: 'About me',
-    content: `Hello! I'm Maximilian Spitzer, a passionate web developer focused on modern frontend technologies.
-    
-    With several years of experience in web application development, I help companies achieve their digital goals. My focus is on React, Next.js and TypeScript.`,
+    content: `Hello! I'm Maximilian Spitzer, a passionate web developer with strong expertise in Python and good knowledge in Next.js, JavaScript and TypeScript. With several years of experience in web application development, I help companies bring their digital products to life.`,
   },
   
   // Contact Section

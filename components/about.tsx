@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
 
@@ -21,7 +22,14 @@ export default function About() {
             {/* Image placeholder */}
             <div className="order-2 lg:order-1">
               <div className="aspect-square bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-lg flex items-center justify-center">
-                <span className="text-neutral-400 text-sm">Profile Image</span>
+                <Image
+                  src="/profile.jpg"
+                  alt="Profile picture"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover"
+                  priority
+                />
               </div>
             </div>
 
@@ -42,23 +50,26 @@ export default function About() {
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {[
-                    'React',
-                    'Next.js',
-                    'TypeScript',
-                    'Node.js',
-                    'Tailwind CSS',
-                    'MongoDB',
-                    'PostgreSQL',
-                    'Git',
-                    'Figma',
-                    'Vercel'
+                  { name: 'React', url: 'https://reactjs.org' },
+                  { name: 'Next.js', url: 'https://nextjs.org' },
+                  { name: 'TypeScript', url: 'https://www.typescriptlang.org' },
+                  { name: 'Node.js', url: 'https://nodejs.org' },
+                  { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
+                  { name: 'Python', url: 'https://www.python.org' },
+                  { name: 'PostgreSQL', url: 'https://www.postgresql.org' },
+                  { name: 'Git', url: 'https://git-scm.com' },
+                  { name: 'Figma', url: 'https://www.figma.com' },
+                  { name: 'Framer', url: 'https://www.framer.com' }
                   ].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-foreground hover:bg-accent transition-colors"
-                    >
-                      {tech}
-                    </span>
+                  <a
+                    key={tech.name}
+                    href={tech.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                  >
+                    {tech.name}
+                  </a>
                   ))}
                 </div>
               </div>
