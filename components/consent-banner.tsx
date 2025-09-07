@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { 
-  isAnalyticsEnabled, 
-  isCookielessMode, 
-  hasAnalyticsConsent, 
+import {
+  isAnalyticsEnabled,
+  isCookielessMode,
+  hasAnalyticsConsent,
   setAnalyticsConsent,
-  loadUmamiScript 
+  loadUmamiScript,
 } from '@/lib/analytics';
 import { trackPortfolioEvent } from '@/lib/analytics';
 
@@ -19,51 +19,54 @@ export default function ConsentBanner() {
 
   const content = {
     de: {
-      message: 'Diese Website verwendet Umami Analytics, um die Nutzung zu analysieren und zu verbessern. Es werden keine personenbezogenen Daten gespeichert.',
+      message:
+        'Diese Website verwendet Umami Analytics, um die Nutzung zu analysieren und zu verbessern. Es werden keine personenbezogenen Daten gespeichert.',
       accept: 'Akzeptieren',
       decline: 'Ablehnen',
-      privacy: 'Datenschutz'
+      privacy: 'Datenschutz',
     },
     en: {
-      message: 'This website uses Umami Analytics to analyze and improve usage. No personal data is stored.',
+      message:
+        'This website uses Umami Analytics to analyze and improve usage. No personal data is stored.',
       accept: 'Accept',
       decline: 'Decline',
-      privacy: 'Privacy'
-    }
+      privacy: 'Privacy',
+    },
   };
 
   const bannerContent = content[language];
 
   useEffect(() => {
     // Only show banner if analytics is enabled, not in cookieless mode, and consent not given
-    const shouldShow = isAnalyticsEnabled() && !isCookielessMode() && !hasAnalyticsConsent();
+    const shouldShow =
+      isAnalyticsEnabled() && !isCookielessMode() && !hasAnalyticsConsent();
     setShowBanner(shouldShow);
   }, []);
 
   const handleAccept = async () => {
     setIsLoading(true);
     setAnalyticsConsent(true);
-    
+
     // Track consent decision
     trackPortfolioEvent.cookieConsentAccepted();
-    
+
     try {
       await loadUmamiScript();
       console.log('Analytics enabled with user consent');
     } catch (error) {
       console.error('Failed to load analytics:', error);
     }
-    
+
     setIsLoading(false);
     setShowBanner(false);
   };
 
   const handleDecline = () => {
     setAnalyticsConsent(false);
-    
+
     // Track consent decision
     trackPortfolioEvent.cookieConsentDeclined();
-    
+
     setShowBanner(false);
   };
 
@@ -78,15 +81,15 @@ export default function ConsentBanner() {
           <div className="flex-1">
             <p className="text-sm text-muted-foreground">
               {bannerContent.message}{' '}
-              <Link 
-                href="/datenschutz" 
+              <Link
+                href="/datenschutz"
                 className="text-foreground hover:underline"
               >
                 {bannerContent.privacy}
               </Link>
             </p>
           </div>
-          
+
           <div className="flex items-center gap-3">
             <button
               onClick={handleDecline}
@@ -95,7 +98,7 @@ export default function ConsentBanner() {
             >
               {bannerContent.decline}
             </button>
-            
+
             <button
               onClick={handleAccept}
               className="px-4 py-2 text-sm bg-foreground text-background rounded-md hover:bg-foreground/90 transition-colors disabled:opacity-50"

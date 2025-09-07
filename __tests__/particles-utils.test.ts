@@ -13,7 +13,7 @@ import {
 
 // Mock global objects
 const mockMatchMedia = (matches: boolean) => {
-  return vi.fn().mockImplementation(query => ({
+  return vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
     onchange: null,
@@ -47,13 +47,15 @@ const mockScreen = (width: number) => {
 describe('particles-utils', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     // Reset window.matchMedia
     window.matchMedia = mockMatchMedia(false);
-    
+
     // Reset navigator
-    mockNavigator('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
-    
+    mockNavigator(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    );
+
     // Reset screen
     mockScreen(1920);
   });
@@ -171,7 +173,10 @@ describe('particles-utils', () => {
     });
 
     it('returns limited performance for mobile devices', () => {
-      mockNavigator('Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)', 2);
+      mockNavigator(
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)',
+        2
+      );
       mockScreen(400);
 
       const capabilities = getDeviceCapabilities();
@@ -208,7 +213,10 @@ describe('particles-utils', () => {
     });
 
     it('returns false for very old Chrome versions on mobile', () => {
-      mockNavigator('Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 Chrome/59.0.3071.125', 2);
+      mockNavigator(
+        'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 Chrome/59.0.3071.125',
+        2
+      );
       mockScreen(400);
 
       expect(shouldEnableParticles()).toBe(false);
@@ -231,19 +239,19 @@ describe('particles-utils', () => {
 
     it('calls callback when FPS is updated', () => {
       const callback = vi.fn();
-      
+
       // Mock performance.now before creating the monitor
       const originalNow = performance.now;
       let time = 0;
       performance.now = vi.fn(() => time);
 
       const monitor = new PerformanceMonitor(callback);
-      
+
       // Simulate 60 frames
       for (let i = 0; i < 60; i++) {
         monitor.update();
       }
-      
+
       // Advance time by 1000ms and call update to trigger callback
       time = 1000;
       monitor.update();
@@ -279,7 +287,10 @@ describe('particles-utils', () => {
         ],
       });
 
-      expect(mockElement.removeEventListener).toHaveBeenCalledWith('click', mockHandler);
+      expect(mockElement.removeEventListener).toHaveBeenCalledWith(
+        'click',
+        mockHandler
+      );
     });
 
     it('clears intervals and timeouts', () => {
@@ -311,7 +322,10 @@ describe('particles-utils', () => {
         ],
       });
 
-      expect(consoleSpy).toHaveBeenCalledWith('Error during cleanup:', expect.any(Error));
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Error during cleanup:',
+        expect.any(Error)
+      );
 
       consoleSpy.mockRestore();
     });

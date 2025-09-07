@@ -15,7 +15,7 @@ export default function DatenschutzPage() {
           title: 'Präambel',
           content: `Mit der folgenden Datenschutzerklärung möchten wir Sie darüber aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als "Daten" bezeichnet) wir zu welchen Zwecken und in welchem Umfang verarbeiten. Die Datenschutzerklärung gilt für alle von uns durchgeführten Verarbeitungen personenbezogener Daten, sowohl im Rahmen der Erbringung unserer Leistungen als auch insbesondere auf unseren Webseiten, in mobilen Applikationen sowie innerhalb externer Onlinepräsenzen, wie z. B. unserer Social-Media-Profile (nachfolgend zusammenfassend bezeichnet als "Onlineangebot").
 
-Die verwendeten Begriffe sind nicht geschlechtsspezifisch.`
+Die verwendeten Begriffe sind nicht geschlechtsspezifisch.`,
         },
         verantwortlicher: {
           title: 'Verantwortlicher',
@@ -23,7 +23,7 @@ Die verwendeten Begriffe sind nicht geschlechtsspezifisch.`
 Stahnsdorfer Str. 81
 14482 Potsdam
 
-E-Mail-Adresse: hello@maximilianspitzer.de`
+E-Mail-Adresse: hello@maximilianspitzer.de`,
         },
         uebersicht: {
           title: 'Übersicht der Verarbeitungen',
@@ -56,7 +56,7 @@ Zwecke der Verarbeitung:
 • Profile mit nutzerbezogenen Informationen
 • Bereitstellung unseres Onlineangebotes und Nutzerfreundlichkeit
 • Informationstechnische Infrastruktur
-• Geschäftsprozesse und betriebswirtschaftliche Verfahren`
+• Geschäftsprozesse und betriebswirtschaftliche Verfahren`,
         },
         rechtsgrundlagen: {
           title: 'Maßgebliche Rechtsgrundlagen',
@@ -70,23 +70,23 @@ Zwecke der Verarbeitung:
 
 • Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO) - Die Verarbeitung ist zur Wahrung der berechtigten Interessen des Verantwortlichen oder eines Dritten notwendig.
 
-Nationale Datenschutzregelungen in Deutschland: Zusätzlich zu den Datenschutzregelungen der DSGVO gelten nationale Regelungen zum Datenschutz in Deutschland. Hierzu gehört insbesondere das Gesetz zum Schutz vor Missbrauch personenbezogener Daten bei der Datenverarbeitung (Bundesdatenschutzgesetz – BDSG).`
+Nationale Datenschutzregelungen in Deutschland: Zusätzlich zu den Datenschutzregelungen der DSGVO gelten nationale Regelungen zum Datenschutz in Deutschland. Hierzu gehört insbesondere das Gesetz zum Schutz vor Missbrauch personenbezogener Daten bei der Datenverarbeitung (Bundesdatenschutzgesetz – BDSG).`,
         },
         sicherheit: {
           title: 'Sicherheitsmaßnahmen',
           content: `Wir treffen nach Maßgabe der gesetzlichen Vorgaben unter Berücksichtigung des Stands der Technik, der Implementierungskosten und der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie der unterschiedlichen Eintrittswahrscheinlichkeiten und des Ausmaßes der Bedrohung der Rechte und Freiheiten natürlicher Personen geeignete technische und organisatorische Maßnahmen, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten.
 
-Zu den Maßnahmen gehören insbesondere die Sicherung der Vertraulichkeit, Integrität und Verfügbarkeit von Daten durch Kontrolle des physischen und elektronischen Zugangs zu den Daten als auch des sie betreffenden Zugriffs, der Eingabe, der Weitergabe, der Sicherung der Verfügbarkeit und ihrer Trennung.`
+Zu den Maßnahmen gehören insbesondere die Sicherung der Vertraulichkeit, Integrität und Verfügbarkeit von Daten durch Kontrolle des physischen und elektronischen Zugangs zu den Daten als auch des sie betreffenden Zugriffs, der Eingabe, der Weitergabe, der Sicherung der Verfügbarkeit und ihrer Trennung.`,
         },
         datenuebermittlung: {
           title: 'Übermittlung von personenbezogenen Daten',
-          content: `Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor, dass diese an andere Stellen, Unternehmen, rechtlich selbstständige Organisationseinheiten oder Personen übermittelt beziehungsweise ihnen gegenüber offengelegt werden. Zu den Empfängern dieser Daten können z. B. mit IT-Aufgaben beauftragte Dienstleister gehören oder Anbieter von Diensten und Inhalten, die in eine Website eingebunden sind. In solchen Fällen beachten wir die gesetzlichen Vorgaben und schließen insbesondere entsprechende Verträge bzw. Vereinbarungen, die dem Schutz Ihrer Daten dienen, mit den Empfängern Ihrer Daten ab.`
+          content: `Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor, dass diese an andere Stellen, Unternehmen, rechtlich selbstständige Organisationseinheiten oder Personen übermittelt beziehungsweise ihnen gegenüber offengelegt werden. Zu den Empfängern dieser Daten können z. B. mit IT-Aufgaben beauftragte Dienstleister gehören oder Anbieter von Diensten und Inhalten, die in eine Website eingebunden sind. In solchen Fällen beachten wir die gesetzlichen Vorgaben und schließen insbesondere entsprechende Verträge bzw. Vereinbarungen, die dem Schutz Ihrer Daten dienen, mit den Empfängern Ihrer Daten ab.`,
         },
         internationale_transfers: {
           title: 'Internationale Datentransfers',
           content: `Datenverarbeitung in Drittländern: Sofern wir Daten in ein Drittland (d. h. außerhalb der Europäischen Union (EU) oder des Europäischen Wirtschaftsraums (EWR)) übermitteln oder dies im Rahmen der Nutzung von Diensten Dritter oder der Offenlegung bzw. Übermittlung von Daten an andere Personen, Stellen oder Unternehmen geschieht, erfolgt dies stets im Einklang mit den gesetzlichen Vorgaben.
 
-Für Datenübermittlungen in die USA stützen wir uns vorrangig auf das Data Privacy Framework (DPF), welches durch einen Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 als sicherer Rechtsrahmen anerkannt wurde.`
+Für Datenübermittlungen in die USA stützen wir uns vorrangig auf das Data Privacy Framework (DPF), welches durch einen Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 als sicherer Rechtsrahmen anerkannt wurde.`,
         },
         datenspeicherung: {
           title: 'Allgemeine Informationen zur Datenspeicherung und Löschung',
@@ -96,7 +96,7 @@ Aufbewahrung und Löschung von Daten nach deutschem Recht:
 • 10 Jahre - Aufbewahrungsfrist für Bücher und Aufzeichnungen, Jahresabschlüsse, Inventare
 • 8 Jahre - Buchungsbelege, wie z. B. Rechnungen und Kostenbelege
 • 6 Jahre - Übrige Geschäftsunterlagen
-• 3 Jahre - Daten für Gewährleistungs- und Schadensersatzansprüche`
+• 3 Jahre - Daten für Gewährleistungs- und Schadensersatzansprüche`,
         },
         rechte: {
           title: 'Rechte der betroffenen Personen',
@@ -114,31 +114,31 @@ Aufbewahrung und Löschung von Daten nach deutschem Recht:
 
 • Recht auf Datenübertragbarkeit: Sie haben das Recht, Ihre Daten in einem strukturierten, maschinenlesbaren Format zu erhalten.
 
-• Beschwerde bei Aufsichtsbehörde: Sie haben das Recht auf Beschwerde bei einer Aufsichtsbehörde.`
+• Beschwerde bei Aufsichtsbehörde: Sie haben das Recht auf Beschwerde bei einer Aufsichtsbehörde.`,
         },
         geschaeftliche_leistungen: {
           title: 'Geschäftliche Leistungen',
           content: `Wir verarbeiten Daten unserer Vertrags- und Geschäftspartner, z. B. Kunden und Interessenten im Rahmen von vertraglichen und vergleichbaren Rechtsverhältnissen sowie damit verbundenen Maßnahmen und im Hinblick auf die Kommunikation mit den Vertragspartnern.
 
-Wir verwenden diese Daten, um unsere vertraglichen Verpflichtungen zu erfüllen. Dazu gehören insbesondere die Pflichten zur Erbringung der vereinbarten Leistungen, etwaige Aktualisierungspflichten und Abhilfe bei Gewährleistungs- und sonstigen Leistungsstörungen.`
+Wir verwenden diese Daten, um unsere vertraglichen Verpflichtungen zu erfüllen. Dazu gehören insbesondere die Pflichten zur Erbringung der vereinbarten Leistungen, etwaige Aktualisierungspflichten und Abhilfe bei Gewährleistungs- und sonstigen Leistungsstörungen.`,
         },
         webhosting: {
           title: 'Bereitstellung des Onlineangebots und Webhosting',
-          content: `Wir verarbeiten die Daten der Nutzer, um ihnen unsere Online-Dienste zur Verfügung zu stellen. Zu diesem Zweck verarbeiten wir die IP-Adresse des Nutzers, die notwendig ist, um die Inhalte und Funktionen unserer Online-Dienste an den Browser oder die Applikation des Nutzers zu übermitteln.`
+          content: `Wir verarbeiten die Daten der Nutzer, um ihnen unsere Online-Dienste zur Verfügung zu stellen. Zu diesem Zweck verarbeiten wir die IP-Adresse des Nutzers, die notwendig ist, um die Inhalte und Funktionen unserer Online-Dienste an den Browser oder die Applikation des Nutzers zu übermitteln.`,
         },
         cookies: {
           title: 'Einsatz von Cookies',
           content: `Cookies sind kleine Textdateien bzw. sonstige Speichervermerke, die Informationen auf Endgeräten speichern und aus ihnen auslesen. Wir setzen Cookies zu verschiedenen Zwecken und auf Grundlage verschiedener Rechtsgrundlagen ein.
 
-Hinweise zu Rechtsgrundlagen: Auf welcher Rechtsgrundlage wir Ihre personenbezogenen Daten mit Hilfe von Cookies verarbeiten, hängt davon ab, ob wir Sie um eine Einwilligung bitten. Falls ja und Sie in die Nutzung von Cookies einwilligen, ist die Rechtsgrundlage die Einwilligung.`
+Hinweise zu Rechtsgrundlagen: Auf welcher Rechtsgrundlage wir Ihre personenbezogenen Daten mit Hilfe von Cookies verarbeiten, hängt davon ab, ob wir Sie um eine Einwilligung bitten. Falls ja und Sie in die Nutzung von Cookies einwilligen, ist die Rechtsgrundlage die Einwilligung.`,
         },
         webanalyse: {
           title: 'Webanalyse, Monitoring und Optimierung',
           content: `Die Webanalyse (auch als "Reichweitenmessung" bezeichnet) dient der Auswertung der Besucherströme unseres Onlineangebotes und kann Verhalten, Interessen oder demographische Informationen zu den Besuchern, wie z. B. das Alter oder das Geschlecht, als pseudonyme Werte umfassen.
 
-Mit Hilfe der Reichweitenmessung können wir z. B. erkennen, zu welcher Zeit unser Onlineangebot oder dessen Funktionen oder Inhalte am häufigsten genutzt werden oder zur Wiederverwendung einladen. Ebenso können wir nachvollziehen, welche Bereiche der Optimierung bedürfen.`
-        }
-      }
+Mit Hilfe der Reichweitenmessung können wir z. B. erkennen, zu welcher Zeit unser Onlineangebot oder dessen Funktionen oder Inhalte am häufigsten genutzt werden oder zur Wiederverwendung einladen. Ebenso können wir nachvollziehen, welche Bereiche der Optimierung bedürfen.`,
+        },
+      },
     },
     en: {
       title: 'Privacy Policy',
@@ -148,7 +148,7 @@ Mit Hilfe der Reichweitenmessung können wir z. B. erkennen, zu welcher Zeit uns
           title: 'Preamble',
           content: `With the following privacy policy, we would like to inform you about the types of your personal data (hereinafter also referred to as "data") that we process, for what purposes and to what extent. The privacy policy applies to all processing of personal data carried out by us, both in the context of providing our services and in particular on our websites, in mobile applications and within external online presences, such as our social media profiles (hereinafter collectively referred to as "online offering").
 
-The terms used are not gender-specific.`
+The terms used are not gender-specific.`,
         },
         verantwortlicher: {
           title: 'Data Controller',
@@ -157,7 +157,7 @@ Stahnsdorfer Str. 81
 14482 Potsdam
 Germany
 
-Email address: hello@maximilianspitzer.de`
+Email address: hello@maximilianspitzer.de`,
         },
         uebersicht: {
           title: 'Overview of Processing',
@@ -190,7 +190,7 @@ Purposes of processing:
 • Profiles with user-related information
 • Provision of our online offering and user-friendliness
 • Information technology infrastructure
-• Business processes and business procedures`
+• Business processes and business procedures`,
         },
         rechtsgrundlagen: {
           title: 'Relevant Legal Bases',
@@ -204,23 +204,23 @@ Purposes of processing:
 
 • Legitimate interests (Art. 6 Para. 1 S. 1 lit. f) GDPR) - Processing is necessary for the purposes of legitimate interests pursued by the controller or by a third party.
 
-National data protection regulations in Germany: In addition to the data protection regulations of the GDPR, national data protection regulations apply in Germany, in particular the Federal Data Protection Act (BDSG).`
+National data protection regulations in Germany: In addition to the data protection regulations of the GDPR, national data protection regulations apply in Germany, in particular the Federal Data Protection Act (BDSG).`,
         },
         sicherheit: {
           title: 'Security Measures',
           content: `We take appropriate technical and organizational measures in accordance with legal requirements, taking into account the state of the art, implementation costs and the nature, scope, circumstances and purposes of processing as well as the different probabilities of occurrence and the extent of the threat to the rights and freedoms of natural persons, in order to ensure a level of protection appropriate to the risk.
 
-The measures include, in particular, securing the confidentiality, integrity and availability of data by controlling physical and electronic access to the data as well as access, input, disclosure, ensuring availability and separation relating to them.`
+The measures include, in particular, securing the confidentiality, integrity and availability of data by controlling physical and electronic access to the data as well as access, input, disclosure, ensuring availability and separation relating to them.`,
         },
         datenuebermittlung: {
           title: 'Transmission of Personal Data',
-          content: `In the course of our processing of personal data, it happens that this data is transmitted to other bodies, companies, legally independent organizational units or persons or disclosed to them. Recipients of this data may include, for example, service providers commissioned with IT tasks or providers of services and content that are integrated into a website. In such cases, we observe the legal requirements and conclude appropriate contracts or agreements that serve to protect your data with the recipients of your data.`
+          content: `In the course of our processing of personal data, it happens that this data is transmitted to other bodies, companies, legally independent organizational units or persons or disclosed to them. Recipients of this data may include, for example, service providers commissioned with IT tasks or providers of services and content that are integrated into a website. In such cases, we observe the legal requirements and conclude appropriate contracts or agreements that serve to protect your data with the recipients of your data.`,
         },
         internationale_transfers: {
           title: 'International Data Transfers',
           content: `Data processing in third countries: Insofar as we transmit data to a third country (i.e. outside the European Union (EU) or the European Economic Area (EEA)) or this occurs in the context of the use of third-party services or the disclosure or transmission of data to other persons, bodies or companies, this always takes place in accordance with legal requirements.
 
-For data transfers to the USA, we primarily rely on the Data Privacy Framework (DPF), which was recognized as a secure legal framework by an adequacy decision of the EU Commission dated July 10, 2023.`
+For data transfers to the USA, we primarily rely on the Data Privacy Framework (DPF), which was recognized as a secure legal framework by an adequacy decision of the EU Commission dated July 10, 2023.`,
         },
         datenspeicherung: {
           title: 'General Information on Data Storage and Deletion',
@@ -230,7 +230,7 @@ Storage and deletion of data according to German law:
 • 10 years - Retention period for books and records, annual accounts, inventories
 • 8 years - Accounting documents, such as invoices and cost receipts
 • 6 years - Other business documents
-• 3 years - Data for warranty and damage claims`
+• 3 years - Data for warranty and damage claims`,
         },
         rechte: {
           title: 'Rights of Data Subjects',
@@ -248,32 +248,32 @@ Storage and deletion of data according to German law:
 
 • Right to data portability: You have the right to receive your data in a structured, machine-readable format.
 
-• Right to lodge a complaint with a supervisory authority: You have the right to lodge a complaint with a supervisory authority.`
+• Right to lodge a complaint with a supervisory authority: You have the right to lodge a complaint with a supervisory authority.`,
         },
         geschaeftliche_leistungen: {
           title: 'Business Services',
           content: `We process data of our contractual and business partners, e.g. customers and interested parties, in the context of contractual and comparable legal relationships as well as associated measures and with regard to communication with the contractual partners.
 
-We use this data to fulfill our contractual obligations. This includes, in particular, the obligations to provide the agreed services, any update obligations and remedies for warranty and other performance disruptions.`
+We use this data to fulfill our contractual obligations. This includes, in particular, the obligations to provide the agreed services, any update obligations and remedies for warranty and other performance disruptions.`,
         },
         webhosting: {
           title: 'Provision of Online Services and Web Hosting',
-          content: `We process users' data in order to provide them with our online services. For this purpose, we process the user's IP address, which is necessary to transmit the content and functions of our online services to the user's browser or application.`
+          content: `We process users' data in order to provide them with our online services. For this purpose, we process the user's IP address, which is necessary to transmit the content and functions of our online services to the user's browser or application.`,
         },
         cookies: {
           title: 'Use of Cookies',
           content: `Cookies are small text files or other storage notes that store information on end devices and read it from them. We use cookies for various purposes and on the basis of various legal bases.
 
-Notes on legal bases: The legal basis on which we process your personal data with the help of cookies depends on whether we ask for your consent. If so and you consent to the use of cookies, the legal basis is consent.`
+Notes on legal bases: The legal basis on which we process your personal data with the help of cookies depends on whether we ask for your consent. If so and you consent to the use of cookies, the legal basis is consent.`,
         },
         webanalyse: {
           title: 'Web Analysis, Monitoring and Optimization',
           content: `Web analysis (also referred to as "reach measurement") serves to evaluate the visitor flows of our online offering and can include behavior, interests or demographic information about visitors, such as age or gender, as pseudonymous values.
 
-With the help of reach measurement, we can recognize, for example, at what time our online offering or its functions or content are used most frequently or invite reuse. We can also understand which areas require optimization.`
-        }
-      }
-    }
+With the help of reach measurement, we can recognize, for example, at what time our online offering or its functions or content are used most frequently or invite reuse. We can also understand which areas require optimization.`,
+        },
+      },
+    },
   };
 
   const { language } = useLanguage();
@@ -284,8 +284,8 @@ With the help of reach measurement, we can recognize, for example, at what time 
       <div className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-muted-foreground hover:text-foreground transition-colors mb-4 inline-block"
             >
               ← {language === 'de' ? 'Zurück zur Startseite' : 'Back to home'}
@@ -293,14 +293,15 @@ With the help of reach measurement, we can recognize, for example, at what time 
             <h1 className="text-4xl font-bold text-foreground mb-2">
               {pageContent.title}
             </h1>
-            <p className="text-muted-foreground">
-              {pageContent.subtitle}
-            </p>
+            <p className="text-muted-foreground">{pageContent.subtitle}</p>
           </div>
 
           <div className="space-y-8">
             {Object.entries(pageContent.sections).map(([key, section]) => (
-              <div key={key} className="bg-accent p-6 rounded-lg border border-border">
+              <div
+                key={key}
+                className="bg-accent p-6 rounded-lg border border-border"
+              >
                 <h2 className="text-xl font-semibold text-foreground mb-4">
                   {section.title}
                 </h2>

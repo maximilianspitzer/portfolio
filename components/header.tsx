@@ -9,14 +9,14 @@ export default function Header() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
-    
+
     // Track navigation click
     trackPortfolioEvent.navigationClick(sectionId);
   };
 
   const handleLanguageChange = (newLanguage: 'de' | 'en') => {
     setLanguage(newLanguage);
-    
+
     // Track language change
     trackPortfolioEvent.languageChange(newLanguage);
   };
@@ -29,7 +29,7 @@ export default function Header() {
             Maximilian Spitzer
           </h1>
         </div>
-        
+
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
           <button
             onClick={() => scrollToSection('about')}
@@ -69,8 +69,8 @@ export default function Header() {
             <button
               onClick={() => handleLanguageChange('de')}
               className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
-                language === 'de' 
-                  ? 'bg-foreground text-background' 
+                language === 'de'
+                  ? 'bg-foreground text-background'
                   : 'text-foreground/60 hover:text-foreground'
               }`}
             >
@@ -79,8 +79,8 @@ export default function Header() {
             <button
               onClick={() => handleLanguageChange('en')}
               className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
-                language === 'en' 
-                  ? 'bg-foreground text-background' 
+                language === 'en'
+                  ? 'bg-foreground text-background'
                   : 'text-foreground/60 hover:text-foreground'
               }`}
             >

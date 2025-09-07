@@ -8,7 +8,7 @@
  */
 export function supportsCanvas(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     const canvas = document.createElement('canvas');
     return !!(canvas.getContext && canvas.getContext('2d'));
@@ -22,10 +22,11 @@ export function supportsCanvas(): boolean {
  */
 export function supportsWebGL(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    const gl =
+      canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     return !!gl;
   } catch {
     return false;
@@ -37,7 +38,7 @@ export function supportsWebGL(): boolean {
  */
 export function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch {
@@ -50,7 +51,7 @@ export function prefersReducedMotion(): boolean {
  */
 export function prefersHighContrast(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     return window.matchMedia('(prefers-contrast: high)').matches;
   } catch {
@@ -63,12 +64,13 @@ export function prefersHighContrast(): boolean {
  */
 export function isMobileDevice(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     const userAgent = navigator.userAgent;
-    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    const mobileRegex =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     const screenWidth = window.screen.width;
-    
+
     return mobileRegex.test(userAgent) || screenWidth < 768;
   } catch {
     return false;
@@ -93,24 +95,35 @@ export function getDeviceCapabilities(): {
       supportsHighFPS: false,
     };
   }
-  
+
   try {
-    const memory = (performance as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
+    const memory = (
+      performance as {
+        memory?: {
+          usedJSHeapSize: number;
+          totalJSHeapSize: number;
+          jsHeapSizeLimit: number;
+        };
+      }
+    ).memory;
     const hardwareConcurrency = navigator.hardwareConcurrency || 2;
     const isMobile = isMobileDevice();
-    
+
     const hasGoodPerformance = !isMobile && hardwareConcurrency >= 4;
-    const supportsHighFPS = hasGoodPerformance && 
+    const supportsHighFPS =
+      hasGoodPerformance &&
       (memory ? memory.jsHeapSizeLimit > 1000000000 : true); // 1GB heap limit
-    
+
     return {
       hasGoodPerformance,
       supportsHighFPS,
-      memoryInfo: memory ? {
-        used: memory.usedJSHeapSize,
-        total: memory.totalJSHeapSize,
-        limit: memory.jsHeapSizeLimit,
-      } : undefined,
+      memoryInfo: memory
+        ? {
+            used: memory.usedJSHeapSize,
+            total: memory.totalJSHeapSize,
+            limit: memory.jsHeapSizeLimit,
+          }
+        : undefined,
     };
   } catch {
     return {
@@ -128,22 +141,25 @@ export function shouldEnableParticles(): boolean {
   if (prefersReducedMotion()) {
     return false;
   }
-  
+
   // Check browser capabilities
   if (!supportsCanvas()) {
     return false;
   }
-  
+
   // For very low-end devices, disable particles
   const capabilities = getDeviceCapabilities();
   if (!capabilities.hasGoodPerformance && isMobileDevice()) {
     const userAgent = navigator.userAgent;
     // Disable on very old browsers/devices
-    if (userAgent.includes('Chrome/') && parseInt(userAgent.split('Chrome/')[1]) < 60) {
+    if (
+      userAgent.includes('Chrome/') &&
+      parseInt(userAgent.split('Chrome/')[1]) < 60
+    ) {
       return false;
     }
   }
-  
+
   return true;
 }
 
@@ -155,31 +171,32 @@ export class PerformanceMonitor {
   private lastTime = performance.now();
   private fps = 60;
   private callback?: (fps: number) => void;
-  
+
   constructor(callback?: (fps: number) => void) {
     this.callback = callback;
   }
-  
+
   public update(): void {
     this.frameCount++;
     const currentTime = performance.now();
     const deltaTime = currentTime - this.lastTime;
-    
-    if (deltaTime >= 1000) { // Update every second
+
+    if (deltaTime >= 1000) {
+      // Update every second
       this.fps = Math.round((this.frameCount * 1000) / deltaTime);
       this.frameCount = 0;
       this.lastTime = currentTime;
-      
+
       if (this.callback) {
         this.callback(this.fps);
       }
     }
   }
-  
+
   public getFPS(): number {
     return this.fps;
   }
-  
+
   public isPerformanceGood(): boolean {
     return this.fps >= 30;
   }
@@ -201,28 +218,28 @@ export function cleanup(elements: {
   try {
     // Clean up media query listeners
     if (elements.mediaQueries) {
-      elements.mediaQueries.forEach(mq => {
+      elements.mediaQueries.forEach((mq) => {
         if (mq && typeof mq.removeEventListener === 'function') {
           // Remove any listeners (implementation would depend on specific usage)
         }
       });
     }
-    
+
     // Clean up event listeners
     if (elements.eventListeners) {
       elements.eventListeners.forEach(({ element, event, handler }) => {
         element.removeEventListener(event, handler);
       });
     }
-    
+
     // Clean up intervals
     if (elements.intervals) {
-      elements.intervals.forEach(id => clearInterval(id));
+      elements.intervals.forEach((id) => clearInterval(id));
     }
-    
+
     // Clean up timeouts
     if (elements.timeouts) {
-      elements.timeouts.forEach(id => clearTimeout(id));
+      elements.timeouts.forEach((id) => clearTimeout(id));
     }
   } catch (error) {
     console.warn('Error during cleanup:', error);

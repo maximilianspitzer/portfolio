@@ -9,7 +9,7 @@ interface TestLinksConfig {
 }
 
 const mockMatchMedia = (matches: boolean) => {
-  return vi.fn().mockImplementation(query => ({
+  return vi.fn().mockImplementation((query) => ({
     matches,
     media: query,
     onchange: null,
@@ -23,7 +23,9 @@ const mockMatchMedia = (matches: boolean) => {
 
 const mockGetComputedStyle = (properties: Record<string, string>) => {
   return vi.fn().mockImplementation(() => ({
-    getPropertyValue: vi.fn().mockImplementation(prop => properties[prop] || ''),
+    getPropertyValue: vi
+      .fn()
+      .mockImplementation((prop) => properties[prop] || ''),
   }));
 };
 
@@ -66,7 +68,7 @@ describe('ParticlesConfigurationManager', () => {
         particle: '#ffffff',
         links: 'rgba(163, 163, 163, 0.3)',
         background: 'transparent',
-        hover: 'rgba(255, 255, 255, 0.1)'
+        hover: 'rgba(255, 255, 255, 0.1)',
       });
 
       global.window = originalWindow;
@@ -140,7 +142,7 @@ describe('ParticlesConfigurationManager', () => {
       const config = configManager.getBaseConfig();
 
       expect(config.particles?.color?.value).toBe('#ffffff');
-      
+
       const links = config.particles?.links as TestLinksConfig;
       expect(links?.enable).toBe(true);
       expect(links?.distance).toBe(150);
@@ -169,7 +171,7 @@ describe('ParticlesConfigurationManager', () => {
       const responsive = configManager.getResponsiveConfig();
 
       expect(responsive).toHaveLength(2);
-      
+
       // Tablet breakpoint
       expect(responsive[0]).toMatchObject({
         maxWidth: 768,
@@ -309,7 +311,7 @@ describe('ParticlesConfigurationManager', () => {
       const testConfig = configManager.getTestConfig();
 
       expect(testConfig.particles?.color?.value).toBeDefined();
-      
+
       const links = testConfig.particles?.links as TestLinksConfig;
       expect(links?.enable).toBe(true);
       expect(testConfig.background).toBeDefined();

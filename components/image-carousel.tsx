@@ -67,8 +67,18 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
             className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
             aria-label={dictionary.work.previous_image}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
 
@@ -77,8 +87,18 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
             className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
             aria-label={dictionary.work.next_image}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </>
@@ -92,8 +112,8 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex 
-                  ? 'bg-foreground' 
+                index === currentIndex
+                  ? 'bg-foreground'
                   : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
               }`}
               aria-label={`Go to image ${index + 1}`}

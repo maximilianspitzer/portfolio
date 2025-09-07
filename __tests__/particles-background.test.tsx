@@ -44,23 +44,26 @@ describe('ParticlesBackground - Core Functionality', () => {
 
   it('should not render when shouldEnableParticles returns false', () => {
     vi.spyOn(particlesUtils, 'shouldEnableParticles').mockReturnValue(false);
-    
+
     const { container } = render(<ParticlesBackground />);
-    
+
     expect(container.firstChild).toBeNull();
   });
 
   it('should render particles container when enabled', async () => {
     vi.spyOn(particlesUtils, 'shouldEnableParticles').mockReturnValue(true);
-    
+
     // Wait a bit for async initialization
     render(<ParticlesBackground />);
-    
+
     // May take time to initialize, so check both scenarios
     try {
-      await vi.waitFor(() => {
-        expect(screen.getByTestId('particles-container')).toBeInTheDocument();
-      }, { timeout: 1000 });
+      await vi.waitFor(
+        () => {
+          expect(screen.getByTestId('particles-container')).toBeInTheDocument();
+        },
+        { timeout: 1000 }
+      );
     } catch {
       // If initialization fails, component should gracefully not render
       const { container } = render(<ParticlesBackground />);
@@ -70,9 +73,9 @@ describe('ParticlesBackground - Core Functionality', () => {
 
   it('should have proper accessibility attributes when rendering', async () => {
     vi.spyOn(particlesUtils, 'shouldEnableParticles').mockReturnValue(true);
-    
+
     const { container } = render(<ParticlesBackground />);
-    
+
     // Check if wrapper has accessibility attributes when present
     const wrapper = container.querySelector('[aria-hidden="true"]');
     if (wrapper) {
@@ -83,25 +86,28 @@ describe('ParticlesBackground - Core Functionality', () => {
 
   it('should use custom props when provided', async () => {
     vi.spyOn(particlesUtils, 'shouldEnableParticles').mockReturnValue(true);
-    
+
     const { container } = render(
-      <ParticlesBackground 
-        className="custom-class" 
-        id="custom-id" 
-      />
+      <ParticlesBackground className="custom-class" id="custom-id" />
     );
-    
+
     // Check if custom props are applied when component renders
     const wrapper = container.querySelector('.custom-class');
     if (wrapper) {
       expect(wrapper).toHaveClass('custom-class');
     }
-    
+
     try {
-      await vi.waitFor(() => {
-        const particlesContainer = screen.getByTestId('particles-container');
-        expect(particlesContainer).toHaveAttribute('data-particles-id', 'custom-id');
-      }, { timeout: 500 });
+      await vi.waitFor(
+        () => {
+          const particlesContainer = screen.getByTestId('particles-container');
+          expect(particlesContainer).toHaveAttribute(
+            'data-particles-id',
+            'custom-id'
+          );
+        },
+        { timeout: 500 }
+      );
     } catch {
       // Component may not initialize in test environment - that's ok
     }
@@ -110,10 +116,10 @@ describe('ParticlesBackground - Core Functionality', () => {
   it('should respect accessibility preferences', () => {
     // Test 1: When shouldEnableParticles returns false (respecting reduced motion)
     vi.spyOn(particlesUtils, 'shouldEnableParticles').mockReturnValue(false);
-    
+
     const { container } = render(<ParticlesBackground reducedMotion={true} />);
     expect(container.firstChild).toBeNull();
-    
+
     // Test 2: Ensure shouldEnableParticles is called to check preferences
     expect(particlesUtils.shouldEnableParticles).toHaveBeenCalled();
   });

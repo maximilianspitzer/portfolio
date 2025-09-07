@@ -29,15 +29,21 @@ export default function WorkGrid() {
 
   const openModal = (project: Project) => {
     setSelectedProject(project);
-    
+
     // Track project modal open
-    trackPortfolioEvent.projectModalOpen(project.id, getProjectText(project.titleKey));
+    trackPortfolioEvent.projectModalOpen(
+      project.id,
+      getProjectText(project.titleKey)
+    );
   };
 
   const closeModal = () => {
     if (selectedProject) {
       // Track modal close
-      trackPortfolioEvent.projectModalClose(selectedProject.id, getProjectText(selectedProject.titleKey));
+      trackPortfolioEvent.projectModalClose(
+        selectedProject.id,
+        getProjectText(selectedProject.titleKey)
+      );
     }
     setSelectedProject(null);
   };
@@ -71,7 +77,7 @@ export default function WorkGrid() {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
                   {getProjectText(project.titleKey)}
@@ -79,7 +85,7 @@ export default function WorkGrid() {
                 <p className="text-muted-foreground mb-4 line-clamp-2">
                   {getProjectText(project.descriptionKey)}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span
@@ -95,7 +101,7 @@ export default function WorkGrid() {
                     </span>
                   )}
                 </div>
-                
+
                 <button className="text-sm text-foreground hover:text-foreground/80 transition-colors font-medium">
                   {dictionary.work.view_project} →
                 </button>
@@ -105,10 +111,7 @@ export default function WorkGrid() {
         </div>
 
         {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={closeModal}
-          />
+          <ProjectModal project={selectedProject} onClose={closeModal} />
         )}
       </div>
     </section>
