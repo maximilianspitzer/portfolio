@@ -83,10 +83,17 @@ Object.defineProperty(window, 'IntersectionObserver', {
 });
 
 // Mock scroll behavior
-Object.defineProperty(window.HTMLElement.prototype, 'scrollIntoView', {
-  configurable: true,
-  value: vi.fn(),
-});
+if (typeof window !== 'undefined' && window.HTMLElement && window.HTMLElement.prototype) {
+  Object.defineProperty(window.HTMLElement.prototype, 'scrollIntoView', {
+    configurable: true,
+    value: vi.fn(),
+  });
+} else if (typeof global !== 'undefined' && global.HTMLElement && global.HTMLElement.prototype) {
+  Object.defineProperty(global.HTMLElement.prototype, 'scrollIntoView', {
+    configurable: true,
+    value: vi.fn(),
+  });
+}
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <LanguageProvider>

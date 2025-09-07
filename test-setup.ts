@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Import responsive testing utilities and extend matchers
 import { 
@@ -18,19 +19,45 @@ expect.extend({
   ...performanceMatchers,
 });
 
+// Ensure HTMLElement is available before setting up prototype methods
+if (typeof global.HTMLElement === 'undefined') {
+  global.HTMLElement = class HTMLElement {
+    scrollIntoView = vi.fn();
+  } as any;
+}
+
+// Mock scrollIntoView for HTMLElement prototype
+if (global.HTMLElement && global.HTMLElement.prototype) {
+  Object.defineProperty(global.HTMLElement.prototype, 'scrollIntoView', {
+    configurable: true,
+    writable: true,
+    value: vi.fn(),
+  });
+}
+
 // Mock matchMedia with responsive testing support
+const mockMatchMedia = vi.fn().mockImplementation((query) => ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addListener: vi.fn(), // deprecated
+  removeListener: vi.fn(), // deprecated
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+  dispatchEvent: vi.fn(),
+}));
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+  configurable: true,
+  value: mockMatchMedia,
+});
+
+// Make matchMedia available globally
+Object.defineProperty(global, 'matchMedia', {
+  writable: true,
+  configurable: true,
+  value: mockMatchMedia,
 });
 
 // Mock performance.memory for testing
@@ -113,22 +140,67 @@ Object.defineProperty(global, 'TouchEvent', {
 });
 
 // Mock navigator for device capability testing
+const mockNavigator = {
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
+  hardwareConcurrency: 4,
+  deviceMemory: 8,
+  maxTouchPoints: 0,
+  connection: {
+    effectiveType: '4g',
+    downlink: 10,
+    rtt: 50,
+  },
+  clipboard: {
+    writeText: vi.fn().mockResolvedValue(undefined),
+    readText: vi.fn().mockResolvedValue(''),
+  },
+  platform: 'MacIntel',
+  language: 'en-US',
+  languages: ['en-US', 'en'],
+  onLine: true,
+  cookieEnabled: true,
+};
+
+Object.defineProperty(global, 'navigator', {
+  writable: true,
+  value: mockNavigator,
+});
+
 Object.defineProperty(navigator, 'hardwareConcurrency', {
   writable: true,
+  configurable: true,
   value: 4,
 });
 
 Object.defineProperty(navigator, 'deviceMemory', {
   writable: true,
+  configurable: true,
   value: 8,
+});
+
+Object.defineProperty(navigator, 'maxTouchPoints', {
+  writable: true,
+  configurable: true,
+  value: 0,
 });
 
 Object.defineProperty(navigator, 'connection', {
   writable: true,
+  configurable: true,
   value: {
     effectiveType: '4g',
     downlink: 10,
     rtt: 50,
+  },
+});
+
+// Mock clipboard API for container query tests
+Object.defineProperty(navigator, 'clipboard', {
+  writable: true,
+  configurable: true,
+  value: {
+    writeText: vi.fn().mockResolvedValue(undefined),
+    readText: vi.fn().mockResolvedValue(''),
   },
 });
 
@@ -220,6 +292,7 @@ Element.prototype.getBoundingClientRect = vi.fn().mockImplementation(() => ({
 // Mock clipboard API for container query tests
 Object.defineProperty(navigator, 'clipboard', {
   writable: true,
+  configurable: true,
   value: {
     writeText: vi.fn().mockResolvedValue(undefined),
     readText: vi.fn().mockResolvedValue(''),
@@ -227,19 +300,68 @@ Object.defineProperty(navigator, 'clipboard', {
 });
 
 // Add global vi function for test files
-global.vi = vi;
+(global as any).vi = vi;
 
-// Define window globally for browser APIs
+// Ensure window object is available globally
+if (typeof global.window === 'undefined') {
+  (global as any).window = {};
+}
+
+// Define comprehensive window object for browser APIs
 Object.defineProperty(global, 'window', {
   writable: true,
+  configurable: true,
   value: {
     ...window,
-    navigator: {
-      ...navigator,
-      clipboard: {
-        writeText: vi.fn().mockResolvedValue(undefined),
-        readText: vi.fn().mockResolvedValue(''),
-      },
+    navigator: mockNavigator,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+    getComputedStyle: vi.fn().mockReturnValue({
+      getPropertyValue: vi.fn().mockReturnValue(''),
+    }),
+    document: document,
+    screen: {
+      width: 1024,
+      height: 768,
     },
+    innerWidth: 1024,
+    innerHeight: 768,
+    devicePixelRatio: 1,
+    location: {
+      href: 'http://localhost:3000',
+      origin: 'http://localhost:3000',
+    },
+    matchMedia: mockMatchMedia,
+    requestAnimationFrame: vi.fn().mockImplementation((callback) => {
+      return setTimeout(callback, 16);
+    }),
+    cancelAnimationFrame: vi.fn().mockImplementation((id) => {
+      clearTimeout(id);
+    }),
   },
+});
+
+// Ensure window.window points to itself (some libraries check this)
+if (global.window) {
+  global.window.window = global.window;
+}
+
+// Also ensure the window is available on the global object
+Object.defineProperty(window, 'addEventListener', {
+  writable: true,
+  configurable: true,
+  value: vi.fn(),
+});
+
+Object.defineProperty(window, 'removeEventListener', {
+  writable: true,
+  configurable: true,
+  value: vi.fn(),
+});
+
+Object.defineProperty(window, 'dispatchEvent', {
+  writable: true,
+  configurable: true,
+  value: vi.fn(),
 });

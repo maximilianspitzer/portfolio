@@ -146,7 +146,7 @@ export const getDeviceInfo = (): DeviceInfo => {
   const isDesktop = width >= 1024;
   
   // Touch capability detection
-  const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const hasTouch = 'ontouchstart' in window || (navigator?.maxTouchPoints && navigator.maxTouchPoints > 0) || false;
   
   // Orientation detection
   const orientation = height > width ? 'portrait' : 'landscape';
@@ -328,7 +328,7 @@ export const isLowPoweredDevice = (): boolean => {
  * Get reduced motion preference
  */
 export const prefersReducedMotion = (): boolean => {
-  if (typeof window === 'undefined') {
+  if (typeof window === 'undefined' || !window.matchMedia) {
     return false;
   }
   

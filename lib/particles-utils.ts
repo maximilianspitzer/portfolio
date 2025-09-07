@@ -63,13 +63,13 @@ export function prefersHighContrast(): boolean {
  * Checks if device is mobile based on screen size and user agent
  */
 export function isMobileDevice(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
 
   try {
-    const userAgent = navigator.userAgent;
+    const userAgent = navigator.userAgent || '';
     const mobileRegex =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    const screenWidth = window.screen.width;
+    const screenWidth = window.screen?.width || 1024;
 
     return mobileRegex.test(userAgent) || screenWidth < 768;
   } catch {
@@ -150,7 +150,7 @@ export function shouldEnableParticles(): boolean {
   // For very low-end devices, disable particles
   const capabilities = getDeviceCapabilities();
   if (!capabilities.hasGoodPerformance && isMobileDevice()) {
-    const userAgent = navigator.userAgent;
+    const userAgent = navigator?.userAgent || '';
     // Disable on very old browsers/devices
     if (
       userAgent.includes('Chrome/') &&

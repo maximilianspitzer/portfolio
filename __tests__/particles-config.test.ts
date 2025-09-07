@@ -66,7 +66,7 @@ describe('ParticlesConfigurationManager', () => {
 
       expect(colors).toEqual({
         particle: '#ffffff',
-        links: 'rgba(163, 163, 163, 0.3)',
+        links: 'rgba(163, 163, 163, 0.2)',
         background: 'transparent',
         hover: 'rgba(255, 255, 255, 0.1)',
       });

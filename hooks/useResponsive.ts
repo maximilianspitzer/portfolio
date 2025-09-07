@@ -133,17 +133,21 @@ export const useResponsive = (options: UseResponsiveOptions = {}): ResponsiveSta
     
     setIsHydrated(true);
 
-    // Setup event listeners
-    window.addEventListener('resize', handleResize, { passive: true });
-    window.addEventListener('orientationchange', handleOrientationChange, { passive: true });
-
-    // iOS Safari fix for orientation change
-    window.addEventListener('load', handleOrientationChange, { passive: true });
+    // Setup event listeners with error handling for test environments
+    if (typeof window !== 'undefined' && window.addEventListener) {
+      window.addEventListener('resize', handleResize, { passive: true });
+      window.addEventListener('orientationchange', handleOrientationChange, { passive: true });
+      
+      // iOS Safari fix for orientation change
+      window.addEventListener('load', handleOrientationChange, { passive: true });
+    }
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('orientationchange', handleOrientationChange);
-      window.removeEventListener('load', handleOrientationChange);
+      if (typeof window !== 'undefined' && window.removeEventListener) {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleOrientationChange);
+        window.removeEventListener('load', handleOrientationChange);
+      }
     };
   }, [handleResize, handleOrientationChange, enableDeviceDetection]);
 
