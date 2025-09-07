@@ -233,7 +233,7 @@ describe('WorkGrid Responsive Component', () => {
 
   describe('Responsive Interactions', () => {
     it('should track responsive analytics when project is opened', async () => {
-      render(<WorkGrid />, { wrapper: TestWrapper });
+      const { container } = render(<WorkGrid />, { wrapper: TestWrapper });
       
       const projectCards = screen.getAllByRole('button');
       const firstCard = projectCards[0];
@@ -250,7 +250,7 @@ describe('WorkGrid Responsive Component', () => {
             is_touch_device: false,
           })
         );
-      });
+      }, { container });
     });
 
     it('should handle keyboard interactions for accessibility', () => {
@@ -343,7 +343,7 @@ describe('WorkGrid Responsive Component', () => {
 
   describe('Modal Integration', () => {
     it('should open and close modal correctly', async () => {
-      render(<WorkGrid />, { wrapper: TestWrapper });
+      const { container } = render(<WorkGrid />, { wrapper: TestWrapper });
       
       const projectCards = screen.getAllByRole('button');
       const firstCard = projectCards[0];
@@ -352,7 +352,7 @@ describe('WorkGrid Responsive Component', () => {
       fireEvent.click(firstCard);
       await waitFor(() => {
         expect(screen.getByTestId('project-modal')).toBeInTheDocument();
-      });
+      }, { container });
       
       // Close modal
       const closeButton = screen.getByTestId('close-modal');
@@ -360,11 +360,11 @@ describe('WorkGrid Responsive Component', () => {
       
       await waitFor(() => {
         expect(screen.queryByTestId('project-modal')).not.toBeInTheDocument();
-      });
+      }, { container });
     });
 
     it('should track modal close events', async () => {
-      render(<WorkGrid />, { wrapper: TestWrapper });
+      const { container } = render(<WorkGrid />, { wrapper: TestWrapper });
       
       const projectCards = screen.getAllByRole('button');
       const firstCard = projectCards[0];
@@ -372,7 +372,7 @@ describe('WorkGrid Responsive Component', () => {
       fireEvent.click(firstCard);
       await waitFor(() => {
         expect(screen.getByTestId('project-modal')).toBeInTheDocument();
-      });
+      }, { container });
       
       const closeButton = screen.getByTestId('close-modal');
       fireEvent.click(closeButton);
@@ -382,7 +382,7 @@ describe('WorkGrid Responsive Component', () => {
           projects[0].id,
           expect.any(String)
         );
-      });
+      }, { container });
     });
   });
 
