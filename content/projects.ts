@@ -1,8 +1,8 @@
 export interface Project {
   id: string;
-  title: string;
-  description: string;
-  longDescription: string;
+  titleKey: string;
+  descriptionKey: string;
+  longDescriptionKey: string;
   technologies: string[];
   images: string[];
   liveUrl?: string;
@@ -12,45 +12,58 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'project-1',
-    title: 'E-Commerce Platform',
-    description: 'Modern online shop with payment integration',
-    longDescription: 'A comprehensive e-commerce solution built with Next.js, featuring product catalog, shopping cart, secure payment processing with Stripe, and admin dashboard for inventory management.',
-    technologies: ['Next.js', 'TypeScript', 'Stripe', 'Prisma', 'PostgreSQL'],
-    images: ['/placeholder-project-1.jpg', '/placeholder-project-2.jpg'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/username/project',
+    id: 'lumeo-labs',
+    titleKey: 'projects.lumeo-labs.title',
+    descriptionKey: 'projects.lumeo-labs.description',
+    longDescriptionKey: 'projects.lumeo-labs.longDescription',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    images: [
+      '/images/lumeo/hero.png',
+      '/images/lumeo/pricing.png',
+      '/images/lumeo/trust.png',
+    ],
     featured: true,
   },
   {
-    id: 'project-2',
-    title: 'Task Management App',
-    description: 'Collaborative project management tool',
-    longDescription: 'A modern task management application with real-time collaboration features, drag-and-drop functionality, team workspaces, and progress tracking.',
-    technologies: ['React', 'TypeScript', 'Socket.io', 'Node.js', 'MongoDB'],
-    images: ['/placeholder-project-3.jpg', '/placeholder-project-4.jpg'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/username/project',
+    id: 'coolasfuck-tools',
+    titleKey: 'projects.coolasfuck-tools.title',
+    descriptionKey: 'projects.coolasfuck-tools.description',
+    longDescriptionKey: 'projects.coolasfuck-tools.longDescription',
+    technologies: ['Next.js', 'React', 'Tailwind CSS'],
+    images: [
+      '/images/caf/hero.jpg',
+      '/images/caf/cards.jpg',
+      '/images/caf/filters.jpg',
+    ],
+    liveUrl: 'https://coolasfuck.tools',
     featured: true,
   },
   {
-    id: 'project-3',
-    title: 'Portfolio Website',
-    description: 'Responsive portfolio with CMS integration',
-    longDescription: 'A clean and minimal portfolio website with headless CMS integration, optimized for performance and SEO, featuring a blog and project showcase.',
-    technologies: ['Next.js', 'Sanity CMS', 'Tailwind CSS', 'Vercel'],
-    images: ['/placeholder-project-5.jpg', '/placeholder-project-6.jpg'],
-    liveUrl: 'https://example.com',
-    featured: false,
+    id: 'mxp-bio',
+    titleKey: 'projects.mxp-bio.title',
+    descriptionKey: 'projects.mxp-bio.description',
+    longDescriptionKey: 'projects.mxp-bio.longDescription',
+    technologies: ['Next.js', 'React', 'Tailwind CSS'],
+    images: [
+      '/images/mxpbio/hero.jpg',
+      '/images/mxpbio/detail.jpg',
+      '/images/mxpbio/theme.jpg',
+    ],
+    liveUrl: 'https://mxp.bio',
+    featured: true,
   },
   {
-    id: 'project-4',
-    title: 'Analytics Dashboard',
-    description: 'Real-time data visualization platform',
-    longDescription: 'An analytics dashboard for tracking business metrics with real-time data updates, interactive charts, and customizable widgets.',
-    technologies: ['React', 'D3.js', 'Node.js', 'Redis', 'Chart.js'],
-    images: ['/placeholder-project-7.jpg', '/placeholder-project-8.jpg'],
-    githubUrl: 'https://github.com/username/project',
-    featured: false,
+    id: 'portfolio-site',
+    titleKey: 'projects.portfolio-site.title',
+    descriptionKey: 'projects.portfolio-site.description',
+    longDescriptionKey: 'projects.portfolio-site.longDescription',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Unraid', 'Umami'],
+    images: [
+      '/images/portfolio/hero.png',
+      '/images/portfolio/work.png',
+      '/images/portfolio/about.png',
+    ],
+    liveUrl: 'https://maximilianspitzer.de',
+    featured: true,
   },
 ];

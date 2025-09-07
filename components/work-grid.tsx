@@ -12,17 +12,27 @@ export default function WorkGrid() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useSectionTracking('work');
 
+  // Helper function to get nested translation values
+  const getProjectText = (key: string) => {
+    const keys = key.split('.');
+    let value: any = dictionary;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
   const openModal = (project: Project) => {
     setSelectedProject(project);
     
     // Track project modal open
-    trackPortfolioEvent.projectModalOpen(project.id, project.title);
+    trackPortfolioEvent.projectModalOpen(project.id, getProjectText(project.titleKey));
   };
 
   const closeModal = () => {
     if (selectedProject) {
       // Track modal close
-      trackPortfolioEvent.projectModalClose(selectedProject.id, selectedProject.title);
+      trackPortfolioEvent.projectModalClose(selectedProject.id, getProjectText(selectedProject.titleKey));
     }
     setSelectedProject(null);
   };
@@ -57,10 +67,10 @@ export default function WorkGrid() {
               
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
-                  {project.title}
+                  {getProjectText(project.titleKey)}
                 </h3>
                 <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {project.description}
+                  {getProjectText(project.descriptionKey)}
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">

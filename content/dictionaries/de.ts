@@ -100,4 +100,28 @@ export const de = {
     impressum: 'Impressum',
     datenschutz: 'Datenschutz',
   },
+  
+  // Projects
+  projects: {
+    'lumeo-labs': {
+      title: 'Lumeo Labs',
+      description: 'B2B Landing Page für Privacy-First Cloud Services',
+      longDescription: 'Landing Page für mein eigenes Startup, fokussiert auf On-Premise Private Cloud Lösungen. Die Seite betont Vertrauen, DSGVO-Konformität, Preistransparenz und Glaubwürdigkeit durch Testimonials und Uptime-Garantien. Entwickelt, um sauber, professionell und conversion-orientiert zu sein.',
+    },
+    'coolasfuck-tools': {
+      title: 'CoolAsFuck.tools',
+      description: 'Kuratiertes Tools-Verzeichnis mit interaktiver Benutzeroberfläche',
+      longDescription: 'Eine spielerische, aber technisch solide Web-App, die nützliche Tools in einem kategorisierten, filterbaren Verzeichnis kuratiert. Beinhaltet Responsive Design, sanfte Interaktionen und eine saubere Benutzererfahrung. Demonstriert starke Frontend-Implementierung und Liebe zum Detail.',
+    },
+    'mxp-bio': {
+      title: 'mxp.bio',
+      description: 'Interaktive persönliche Bio-Website',
+      longDescription: 'Eine spielerische, terminal-ähnliche persönliche Bio-Seite mit benutzerdefinierten Themes und interaktiven Elementen. Als Experiment in Design + Frontend-Coding entwickelt, zeigt Kreativität und eine einzigartige Benutzererfahrung.',
+    },
+    'portfolio-site': {
+      title: 'maximilianspitzer.de',
+      description: 'Persönliche Portfolio & Showcase Website',
+      longDescription: 'Meine eigene Portfolio-Website, entwickelt um Projekte zu präsentieren und neue Kunden zu gewinnen. Entworfen als saubere, professionelle One-Page-Site mit zweisprachiger Unterstützung (DE/EN), modal-basierten Projekt-Showcases und monochromer Ästhetik. Gehostet auf meinem eigenen Unraid-Server mit Analytics und rechtlicher Compliance (Impressum, Datenschutz).',
+    },
+  },
 };

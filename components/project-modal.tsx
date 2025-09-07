@@ -16,6 +16,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusedElement = useRef<HTMLElement | null>(null);
 
+  // Helper function to get nested translation values
+  const getProjectText = (key: string) => {
+    const keys = key.split('.');
+    let value: any = dictionary;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
   // Focus trap and accessibility
   useEffect(() => {
     // Store the previously focused element
@@ -113,7 +123,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className="mb-6">
                 <ImageCarousel 
                   images={project.images} 
-                  alt={project.title}
+                  alt={getProjectText(project.titleKey)}
                 />
               </div>
             )}
@@ -122,10 +132,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div className="space-y-6">
               <div>
                 <h2 id="modal-title" className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                  {project.title}
+                  {getProjectText(project.titleKey)}
                 </h2>
                 <p className="text-muted-foreground">
-                  {project.longDescription}
+                  {getProjectText(project.longDescriptionKey)}
                 </p>
               </div>
 

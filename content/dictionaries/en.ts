@@ -100,4 +100,28 @@ export const en = {
     impressum: 'Legal Notice',
     datenschutz: 'Privacy Policy',
   },
+  
+  // Projects
+  projects: {
+    'lumeo-labs': {
+      title: 'Lumeo Labs',
+      description: 'B2B landing page for privacy-first cloud services',
+      longDescription: 'Landing page for my own startup, focused on on-premise private cloud solutions. The site emphasizes trust, GDPR compliance, pricing transparency, and credibility through testimonials and uptime guarantees. Built to be clean, professional, and conversion-oriented.',
+    },
+    'coolasfuck-tools': {
+      title: 'CoolAsFuck.tools',
+      description: 'Curated tools directory with interactive UI',
+      longDescription: 'A playful yet technically solid web app that curates useful tools in a categorized, filterable directory. Includes responsive design, smooth interactions, and a clean user experience. Demonstrates strong front-end implementation and attention to detail.',
+    },
+    'mxp-bio': {
+      title: 'mxp.bio',
+      description: 'Interactive personal bio website',
+      longDescription: 'A playful, terminal-style personal bio site with custom theming and interactive elements. Built as an experiment in design + front-end coding, showcasing creativity and a unique user experience.',
+    },
+    'portfolio-site': {
+      title: 'maximilianspitzer.de',
+      description: 'Personal portfolio & showcase website',
+      longDescription: 'My own portfolio website, built to showcase projects and attract new clients. Designed as a clean, professional one-page site with bilingual support (DE/EN), modal-based project showcases, and a monochrome aesthetic. Hosted on my own Unraid server with analytics and legal compliance (Impressum, Datenschutz).',
+    },
+  },
 };
