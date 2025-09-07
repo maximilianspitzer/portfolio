@@ -3,6 +3,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trackPortfolioEvent } from '@/lib/analytics';
 import { useSectionTracking } from '@/hooks/useAnalyticsTracking';
+import ParticlesBackground from '@/components/particles-background';
 
 export default function Hero() {
   const { dictionary } = useLanguage();
@@ -27,9 +28,13 @@ export default function Hero() {
     <section 
       ref={sectionRef}
       id="hero" 
-      className="min-h-screen flex items-center justify-center bg-background"
+      className="relative min-h-screen flex items-center justify-center bg-background"
     >
-      <div className="container mx-auto px-4 text-center">
+      {/* Particles Background Layer */}
+      <ParticlesBackground />
+      
+      {/* Content Layer */}
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in">
             {dictionary.hero.headline}
@@ -56,6 +61,18 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      {/* Fade overlay at bottom of hero - same technique as your other project */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-40"
+        style={{
+          background: `linear-gradient(to top, 
+            #0a0a0a 0%,
+            #050505 25%,
+            #020202 50%,
+            #010101 75%,
+            transparent 100%)`
+        }}
+      />
     </section>
   );
 }
