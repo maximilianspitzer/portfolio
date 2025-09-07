@@ -3,9 +3,8 @@
  * Handles particle system configuration with theme integration, accessibility, and responsive design
  */
 
-import { Opacity, type ISourceOptions } from '@tsparticles/engine';
+import type { ISourceOptions } from '@tsparticles/engine';
 import type { ResponsiveOption, ThemeColors } from '@/types/particles';
-import { group } from 'console';
 
 export class ParticlesConfigurationManager {
   private static instance: ParticlesConfigurationManager;
