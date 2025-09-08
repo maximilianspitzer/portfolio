@@ -47,10 +47,10 @@ export default function Footer() {
           {/* Social links */}
           <div className="flex items-center space-responsive-md">
             <a
-              href="https://github.com"
+              href="https://github.com/maximilianspitzer"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => handleSocialClick('GitHub', 'https://github.com')}
+              onClick={() => handleSocialClick('GitHub', 'https://github.com/maximilianspitzer')}
               className="touch-target-comfortable text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md active:scale-98"
               aria-label={dictionary.footer.github}
             >
@@ -69,11 +69,11 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/maximilian-spitzer"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
-                handleSocialClick('LinkedIn', 'https://linkedin.com')
+                handleSocialClick('LinkedIn', 'https://linkedin.com/in/maximilian-spitzer')
               }
               className="touch-target-comfortable text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md active:scale-98"
               aria-label={dictionary.footer.linkedin}
