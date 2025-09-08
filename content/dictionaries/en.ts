@@ -114,7 +114,7 @@ export const en = {
       title: 'Lumeo Labs',
       description: 'B2B landing page for privacy-first cloud services',
       longDescription:
-        'Landing page for my own startup, focused on on-premise private cloud solutions. The site emphasizes trust, GDPR compliance, pricing transparency, and credibility through testimonials and uptime guarantees. Built to be clean, professional, and conversion-oriented.',
+        'Landing page, focused on on-premise private cloud solutions. The site emphasizes trust, GDPR compliance, pricing transparency, and credibility through testimonials and uptime guarantees. Built to be clean, professional, and conversion-oriented.',
     },
     'coolasfuck-tools': {
       title: 'CoolAsFuck.tools',
