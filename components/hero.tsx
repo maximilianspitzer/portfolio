@@ -155,7 +155,7 @@ if (typeof window !== 'undefined' && 'performance' in window) {
   if (typeof PerformanceObserver !== 'undefined') {
     try {
       observer.observe({ entryTypes: ['layout-shift'] });
-    } catch (error) {
+    } catch {
       // Layout shift observation may not be supported
       console.debug('Layout shift observation not supported');
     }

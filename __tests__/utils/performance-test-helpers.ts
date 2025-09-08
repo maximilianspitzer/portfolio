@@ -4,9 +4,9 @@
  */
 
 import { vi } from 'vitest';
-import { render, act, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { ReactElement } from 'react';
-import { TEST_VIEWPORTS, ViewportName, ResponsiveTestEnvironment } from './responsive-test-helpers';
+import { ViewportName, ResponsiveTestEnvironment } from './responsive-test-helpers';
 
 // Performance budgets for different device types
 export const PERFORMANCE_BUDGETS = {
@@ -66,7 +66,7 @@ export class WebVitalsTester {
    */
   private setupMockPerformanceAPI() {
     // Mock PerformanceObserver
-    global.PerformanceObserver = vi.fn().mockImplementation((callback) => {
+    global.PerformanceObserver = vi.fn().mockImplementation(() => {
       const observer = {
         observe: vi.fn(),
         disconnect: vi.fn(),
@@ -74,10 +74,9 @@ export class WebVitalsTester {
       };
       this.observers.push(observer);
       return observer;
-    }) as any;
+    }) as unknown;
 
     // Mock performance.now() to provide consistent timing
-    const originalNow = performance.now;
     vi.spyOn(performance, 'now').mockImplementation(() => {
       return Date.now() - 1000000000000; // Provide consistent baseline
     });
@@ -634,12 +633,10 @@ export const performanceMatchers = {
 };
 
 // Extend vitest matchers
-declare global {
-  namespace Vi {
-    interface AsymmetricMatchersContaining {
-      toMeetPerformanceBudget: (minScore?: number) => any;
-      toOptimizeForMobile: () => any;
-      toRespectReducedMotion: () => any;
-    }
+declare module 'vitest' {
+  interface AsymmetricMatchersContaining {
+    toMeetPerformanceBudget: (minScore?: number) => unknown;
+    toOptimizeForMobile: () => unknown;
+    toRespectReducedMotion: () => unknown;
   }
 }

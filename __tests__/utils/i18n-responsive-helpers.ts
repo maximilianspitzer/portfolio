@@ -4,9 +4,9 @@
  */
 
 import { vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { ReactElement, ReactNode, createElement } from 'react';
-import { TEST_VIEWPORTS, ViewportName, ResponsiveTestEnvironment } from './responsive-test-helpers';
+import { ViewportName, ResponsiveTestEnvironment } from './responsive-test-helpers';
 
 // German language layout constants
 export const GERMAN_LAYOUT_CONFIG = {
@@ -118,7 +118,7 @@ export async function testWithBothLanguages(
  */
 export function validateTextExpansionHandling(
   container: HTMLElement,
-  expectedExpansion: number = GERMAN_LAYOUT_CONFIG.textExpansionFactor
+  // expectedExpansion: number = GERMAN_LAYOUT_CONFIG.textExpansionFactor
 ): {
   valid: boolean;
   issues: Array<{
@@ -205,7 +205,7 @@ export async function testTextLengthScaling(
 
   env.setViewport(viewport);
 
-  for (const { factor, description } of textLengths) {
+  for (const { factor } of textLengths) {
     try {
       // Mock longer text content
       const mockLongText = 'A'.repeat(Math.floor(20 * factor)); // Simulate text of various lengths
@@ -301,7 +301,6 @@ export function validateGermanTypography(container: HTMLElement): {
 
     // Check text width for readability
     const rect = element.getBoundingClientRect();
-    const textLength = element.textContent?.length || 0;
     const approximateCharsPerLine = Math.floor(rect.width / (fontSize * 0.6)); // Rough estimation
 
     if (approximateCharsPerLine > GERMAN_LAYOUT_CONFIG.maxLineLength) {
@@ -338,7 +337,7 @@ export function validateGermanTypography(container: HTMLElement): {
  */
 export async function testWithGermanContent(
   component: ReactElement,
-  contentType: keyof typeof GERMAN_TEXT_SAMPLES = 'longText',
+  // contentType: keyof typeof GERMAN_TEXT_SAMPLES = 'longText',
   viewports: ViewportName[] = ['mobile', 'tablet', 'desktop']
 ): Promise<{
   results: Array<{
@@ -484,12 +483,10 @@ export const i18nMatchers = {
 };
 
 // Extend vitest matchers
-declare global {
-  namespace Vi {
-    interface AsymmetricMatchersContaining {
-      toHandleGermanTextExpansion: (maxExpansionFactor?: number) => any;
-      toHaveGoodGermanTypography: (minScore?: number) => any;
-      toWorkInBothLanguages: (testFn: (language: 'de' | 'en') => Promise<void> | void) => any;
-    }
+declare module 'vitest' {
+  interface AsymmetricMatchersContaining {
+    toHandleGermanTextExpansion: (maxExpansionFactor?: number) => unknown;
+    toHaveGoodGermanTypography: (minScore?: number) => unknown;
+    toWorkInBothLanguages: (testFn: (language: 'de' | 'en') => Promise<void> | void) => unknown;
   }
 }

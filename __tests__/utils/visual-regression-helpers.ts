@@ -106,7 +106,7 @@ export class VisualRegressionTester {
     try {
       env.setViewport(viewport);
       
-      const { container } = render(component);
+      render(component);
       
       // Wait for component to render and any animations to complete
       await waitFor(() => {});

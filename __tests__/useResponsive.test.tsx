@@ -356,7 +356,6 @@ describe('useResponsive Hooks', () => {
   describe('SSR Support', () => {
     it('should handle server-side rendering', () => {
       // Mock the getViewportDimensions function to simulate SSR
-      const originalWindowCheck = global.window;
       
       vi.doMock('@/lib/responsive-utils', async () => {
         const actual = await vi.importActual('@/lib/responsive-utils');
@@ -391,8 +390,6 @@ describe('useResponsive Hooks', () => {
       // Test hydration behavior by checking that the hook updates when window is available
       const { result, rerender } = renderHook(() => useResponsive());
 
-      const initialWidth = result.current.viewportWidth;
-      const initialBreakpoint = result.current.currentBreakpoint;
       
       // Change window dimensions and rerender
       mockWindow.innerWidth = 500;

@@ -3,9 +3,9 @@
  * Provides helpers for viewport testing, layout validation, touch targets, and accessibility
  */
 
-import { vi, expect } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ReactElement, ReactNode } from 'react';
+import { vi } from 'vitest';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { ReactElement } from 'react';
 import userEvent from '@testing-library/user-event';
 
 // Standard responsive breakpoints for testing
@@ -133,7 +133,7 @@ export class ResponsiveTestEnvironment {
         value: {},
       });
     } else {
-      delete (global.window as any).ontouchstart;
+      delete (global.window as unknown as { ontouchstart?: unknown }).ontouchstart;
     }
   }
 
@@ -276,7 +276,7 @@ export function validateTypographyScaling(
   expectedSizes: Record<ViewportName, string>
 ): { valid: boolean; actual: Record<ViewportName, string> } {
   const env = new ResponsiveTestEnvironment();
-  const actual: Record<ViewportName, string> = {} as any;
+  const actual: Record<ViewportName, string> = {} as Record<ViewportName, string>;
 
   Object.keys(expectedSizes).forEach(viewport => {
     env.setViewport(viewport as ViewportName);
@@ -301,7 +301,7 @@ export async function validateLayoutStability(
   viewports: ViewportName[] = ['mobile', 'tablet', 'desktop']
 ): Promise<{ stable: boolean; measurements: Record<ViewportName, DOMRect> }> {
   const env = new ResponsiveTestEnvironment();
-  const measurements: Record<ViewportName, DOMRect> = {} as any;
+  const measurements: Record<ViewportName, DOMRect> = {} as Record<ViewportName, DOMRect>;
 
   for (const viewport of viewports) {
     env.setViewport(viewport);
@@ -480,12 +480,10 @@ export const touchInteractions = {
   },
 };
 
-// Extend Jest matchers
-declare global {
-  namespace Vi {
-    interface AsymmetricMatchersContaining {
-      toHaveValidTouchTargets: (minimumSize?: number) => any;
-      toHaveResponsiveLayout: () => any;
-    }
+// Extend vitest matchers
+declare module 'vitest' {
+  interface AsymmetricMatchersContaining {
+    toHaveValidTouchTargets: (minimumSize?: number) => unknown;
+    toHaveResponsiveLayout: () => unknown;
   }
 }

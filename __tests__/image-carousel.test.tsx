@@ -20,12 +20,6 @@ vi.mock('next/image', () => {
   };
 });
 
-const testDictionary = {
-  work: {
-    previous_image: 'Previous image',
-    next_image: 'Next image',
-  }
-};
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <LanguageProvider>
