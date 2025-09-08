@@ -12,7 +12,8 @@ export interface ParticlesBackgroundProps {
 }
 
 export interface ResponsiveOption {
-  maxWidth: number;
+  maxWidth?: number;
+  minWidth?: number;
   options: Partial<ISourceOptions>;
 }
 

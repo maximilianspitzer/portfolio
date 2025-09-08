@@ -36,11 +36,16 @@ export default function About() {
             {/* Content */}
             <div className="order-1 lg:order-2 space-y-6">
               <div className="prose prose-gray max-w-none">
-                {dictionary.about.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="text-muted-foreground leading-relaxed text-lg mb-4">
-                    {paragraph.trim()}
-                  </p>
-                ))}
+                {dictionary.about.content
+                  .split('\n\n')
+                  .map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-muted-foreground leading-relaxed text-lg mb-4"
+                    >
+                      {paragraph.trim()}
+                    </p>
+                  ))}
               </div>
 
               {/* Skills/Technologies */}
@@ -50,26 +55,29 @@ export default function About() {
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {[
-                  { name: 'React', url: 'https://reactjs.org' },
-                  { name: 'Next.js', url: 'https://nextjs.org' },
-                  { name: 'TypeScript', url: 'https://www.typescriptlang.org' },
-                  { name: 'Node.js', url: 'https://nodejs.org' },
-                  { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
-                  { name: 'Python', url: 'https://www.python.org' },
-                  { name: 'PostgreSQL', url: 'https://www.postgresql.org' },
-                  { name: 'Git', url: 'https://git-scm.com' },
-                  { name: 'Figma', url: 'https://www.figma.com' },
-                  { name: 'Framer', url: 'https://www.framer.com' }
+                    { name: 'React', url: 'https://reactjs.org' },
+                    { name: 'Next.js', url: 'https://nextjs.org' },
+                    {
+                      name: 'TypeScript',
+                      url: 'https://www.typescriptlang.org',
+                    },
+                    { name: 'Node.js', url: 'https://nodejs.org' },
+                    { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
+                    { name: 'Python', url: 'https://www.python.org' },
+                    { name: 'PostgreSQL', url: 'https://www.postgresql.org' },
+                    { name: 'Git', url: 'https://git-scm.com' },
+                    { name: 'Figma', url: 'https://www.figma.com' },
+                    { name: 'Framer', url: 'https://www.framer.com' },
                   ].map((tech) => (
-                  <a
-                    key={tech.name}
-                    href={tech.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-foreground hover:bg-accent transition-colors"
-                  >
-                    {tech.name}
-                  </a>
+                    <a
+                      key={tech.name}
+                      href={tech.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                    >
+                      {tech.name}
+                    </a>
                   ))}
                 </div>
               </div>

@@ -32,10 +32,7 @@ export const projects: Project[] = [
     descriptionKey: 'projects.coolasfuck-tools.description',
     longDescriptionKey: 'projects.coolasfuck-tools.longDescription',
     technologies: ['Next.js', 'React', 'Tailwind CSS'],
-    images: [
-      '/images/caf/hero.png',
-      '/images/caf/cards.png',
-    ],
+    images: ['/images/caf/hero.png', '/images/caf/cards.png'],
     previewImage: '/images/caf/preview.png',
     liveUrl: 'https://coolasfuck.tools',
     featured: true,
@@ -46,10 +43,7 @@ export const projects: Project[] = [
     descriptionKey: 'projects.mxp-bio.description',
     longDescriptionKey: 'projects.mxp-bio.longDescription',
     technologies: ['Next.js', 'Typescript', 'Docker'],
-    images: [
-      '/images/mxpbio/hero.png',
-      '/images/mxpbio/detail.png',
-    ],
+    images: ['/images/mxpbio/hero.png', '/images/mxpbio/detail.png'],
     previewImage: '/images/mxpbio/preview.png',
     liveUrl: 'https://mxp.bio',
     featured: true,

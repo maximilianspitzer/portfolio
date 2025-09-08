@@ -10,7 +10,8 @@ export function useScrollDepthTracking() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const documentHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = (scrollTop / documentHeight) * 100;
 
       // Only track meaningful milestones
@@ -21,7 +22,7 @@ export function useScrollDepthTracking() {
         const depthKey = depths[index];
         if (scrollPercentage >= threshold && !trackedDepths.has(depthKey)) {
           trackPortfolioEvent.pageScrollDepth(depthKey);
-          setTrackedDepths(prev => new Set(prev).add(depthKey));
+          setTrackedDepths((prev) => new Set(prev).add(depthKey));
         }
       });
     };
@@ -65,13 +66,17 @@ export function useExternalLinkTracking() {
       const target = event.target as HTMLAnchorElement;
       if (target.tagName === 'A' && target.href) {
         const url = target.href;
-        const isExternal = !url.startsWith(window.location.origin) && 
-                          (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:'));
-        
+        const isExternal =
+          !url.startsWith(window.location.origin) &&
+          (url.startsWith('http') ||
+            url.startsWith('mailto:') ||
+            url.startsWith('tel:'));
+
         if (isExternal) {
-          const context = target.closest('section')?.id || 
-                         target.closest('[data-section]')?.getAttribute('data-section') || 
-                         'unknown';
+          const context =
+            target.closest('section')?.id ||
+            target.closest('[data-section]')?.getAttribute('data-section') ||
+            'unknown';
           trackPortfolioEvent.externalLinkClick(url, context);
         }
       }

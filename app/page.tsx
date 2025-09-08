@@ -6,9 +6,9 @@ import WorkGrid from '@/components/work-grid';
 import Services from '@/components/services';
 import Process from '@/components/process';
 import ContactStrip from '@/components/contact-strip';
-import { 
-  useScrollDepthTracking, 
-  useExternalLinkTracking 
+import {
+  useScrollDepthTracking,
+  useExternalLinkTracking,
 } from '@/hooks/useAnalyticsTracking';
 
 export default function Home() {
