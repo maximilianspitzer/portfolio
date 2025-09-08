@@ -17,27 +17,27 @@ export default function Footer() {
 
   return (
     <footer className="border-t bg-background">
-      <div className="container mx-auto py-8">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+      <div className="container mx-auto py-responsive-lg">
+        <div className="mobile-stack items-center justify-between space-responsive-md md:space-responsive-lg">
           {/* Copyright and legal links */}
-          <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
-            <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+          <div className="mobile-stack items-center space-responsive-sm md:space-responsive-md">
+            <p className="text-center text-responsive-sm leading-relaxed text-muted-foreground md:text-left">
               {dictionary.footer.copyright}
             </p>
 
-            <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center space-responsive-sm text-responsive-sm">
               <Link
                 href="/impressum"
                 onClick={() => handleLegalClick('impressum')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="touch-target text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md"
               >
                 {dictionary.footer.impressum}
               </Link>
-              <span className="text-muted-foreground/50">•</span>
+              <span className="text-muted-foreground/50" aria-hidden="true">•</span>
               <Link
                 href="/datenschutz"
                 onClick={() => handleLegalClick('datenschutz')}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="touch-target text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md"
               >
                 {dictionary.footer.datenschutz}
               </Link>
@@ -45,17 +45,17 @@ export default function Footer() {
           </div>
 
           {/* Social links */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-responsive-md">
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleSocialClick('GitHub', 'https://github.com')}
-              className="text-muted-foreground hover:text-foreground transition-colors btn-focus"
+              className="touch-target-comfortable text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md active:scale-98"
               aria-label={dictionary.footer.github}
             >
               <svg
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -75,11 +75,11 @@ export default function Footer() {
               onClick={() =>
                 handleSocialClick('LinkedIn', 'https://linkedin.com')
               }
-              className="text-muted-foreground hover:text-foreground transition-colors btn-focus"
+              className="touch-target-comfortable text-muted-foreground hover:text-foreground transition-colors btn-focus rounded-md active:scale-98"
               aria-label={dictionary.footer.linkedin}
             >
               <svg
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"

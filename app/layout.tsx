@@ -14,8 +14,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Maximilian Spitzer - Web Developer & Designer',
-    template: '%s | Maximilian Spitzer',
+    default: 'maximilianspitzer.de | Web Developer & Designer',
+    template: '%s | maximilianspitzer.de',
   },
   description:
     'Modern web applications and digital experiences with React, Next.js, and TypeScript. Professional web development services in Germany.',

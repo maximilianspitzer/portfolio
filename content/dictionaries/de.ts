@@ -6,6 +6,8 @@ export const de = {
     services: 'Services',
     process: 'Prozess',
     contact: 'Kontakt',
+    openMenu: 'Menü öffnen',
+    closeMenu: 'Menü schließen',
   },
 
   // Hero Section
@@ -91,6 +93,9 @@ export const de = {
     subtitle: 'Lassen Sie uns über Ihr nächstes Projekt sprechen',
     cta: 'E-Mail schreiben',
     email: 'hallo@maximilianspitzer.de',
+    linkedin: 'LinkedIn',
+    phone: 'Anrufen',
+    phoneNumber: '+49 15736252636',
   },
 
   // Footer

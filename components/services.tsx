@@ -8,32 +8,38 @@ export default function Services() {
   const sectionRef = useSectionTracking('services');
 
   return (
-    <section ref={sectionRef} id="services" className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+    <section ref={sectionRef} id="services" className="py-12 xs:py-16 sm:py-20 bg-muted">
+      <div className="container mx-auto">
+        {/* Mobile-first responsive header */}
+        <div className="text-center mb-8 xs:mb-12 sm:mb-16">
+          <h2 className="text-2xl xs:text-3xl md:text-4xl font-bold text-foreground mb-3 xs:mb-4">
             {dictionary.services.title}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base xs:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {dictionary.services.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Mobile-first responsive grid with proper spacing */}
+        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6">
           {dictionary.services.items.map((service, index) => (
             <div
               key={index}
-              className="bg-background p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group"
+              className="bg-background p-4 xs:p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 group focus-within:ring-2 focus-within:ring-foreground/20 focus-within:ring-offset-2 focus-within:ring-offset-muted"
+              role="article"
+              aria-labelledby={`service-${index}-title`}
             >
-              <div className="mb-4">
-                <div className="w-12 h-12 bg-foreground rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              {/* Touch-friendly icon container */}
+              <div className="mb-3 xs:mb-4">
+                <div className="w-12 h-12 xs:w-14 xs:h-14 bg-foreground rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {/* Service icons */}
                   {index === 0 && (
                     <svg
-                      className="w-6 h-6 text-background"
+                      className="w-6 h-6 xs:w-7 xs:h-7 text-background"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -45,10 +51,11 @@ export default function Services() {
                   )}
                   {index === 1 && (
                     <svg
-                      className="w-6 h-6 text-background"
+                      className="w-6 h-6 xs:w-7 xs:h-7 text-background"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -60,10 +67,11 @@ export default function Services() {
                   )}
                   {index === 2 && (
                     <svg
-                      className="w-6 h-6 text-background"
+                      className="w-6 h-6 xs:w-7 xs:h-7 text-background"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -75,10 +83,11 @@ export default function Services() {
                   )}
                   {index === 3 && (
                     <svg
-                      className="w-6 h-6 text-background"
+                      className="w-6 h-6 xs:w-7 xs:h-7 text-background"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -91,11 +100,15 @@ export default function Services() {
                 </div>
               </div>
 
-              <h3 className="text-xl font-semibold text-foreground mb-3">
+              {/* Responsive typography with proper hierarchy */}
+              <h3 
+                id={`service-${index}-title`}
+                className="text-lg xs:text-xl font-semibold text-foreground mb-2 xs:mb-3 leading-tight"
+              >
                 {service.title}
               </h3>
 
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm xs:text-base text-muted-foreground leading-relaxed">
                 {service.description}
               </p>
             </div>

@@ -270,6 +270,32 @@
     width: 100%;
     max-width: 100vw;
   }
+
+  /* Mobile-specific interaction states */
+  .active\:scale-98:active {
+    transform: scale(0.98);
+  }
+
+  .active\:scale-95:active {
+    transform: scale(0.95);
+  }
+
+  /* Mobile modal enhancements */
+  .mobile-modal-overlay {
+    @apply fixed inset-0 bg-background z-50;
+  }
+
+  .mobile-modal-content {
+    @apply h-full flex flex-col overflow-hidden;
+  }
+
+  /* Touch-optimized selection for swipe gestures */
+  .select-none {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
 }
 
 @keyframes fadeIn {

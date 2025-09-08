@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Project } from '@/content/projects';
 import { trackPortfolioEvent } from '@/lib/analytics';
+import { useResponsive } from '@/hooks/useResponsive';
 import ImageCarousel from './image-carousel';
 
 interface ProjectModalProps {
@@ -13,8 +14,11 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { dictionary } = useLanguage();
+  const { deviceInfo, currentBreakpoint } = useResponsive();
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusedElement = useRef<HTMLElement | null>(null);
+  const isMobile = deviceInfo.isMobile;
+  const isTouch = deviceInfo.hasTouch;
 
   // Helper function to get nested translation values
   const getProjectText = (key: string): string => {
@@ -93,32 +97,46 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+    <div className="fixed inset-0 z-50 overflow-hidden">
+      {/* Backdrop - only visible on desktop */}
+      {!isMobile && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
-      {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
+      {/* Modal Container */}
+      <div className={`${
+        isMobile 
+          ? 'fixed inset-0 flex flex-col' 
+          : 'flex min-h-full items-center justify-center p-4'
+      }`}>
         <div
           ref={modalRef}
-          className="relative bg-background border border-border rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          className={`${
+            isMobile
+              ? 'bg-background w-full h-full flex flex-col'
+              : 'relative bg-background border border-border rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto'
+          }`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
           tabIndex={-1}
         >
-          {/* Close button */}
+          {/* Mobile-optimized close button with 48px touch target */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-accent transition-colors"
+            className={`${
+              isMobile
+                ? 'absolute top-4 right-4 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-background border border-border shadow-lg active:scale-95'
+                : 'absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-background/80 backdrop-blur-sm hover:bg-accent'
+            } transition-all duration-200 touch-target`}
             aria-label={dictionary.work.close_modal}
           >
             <svg
-              className="w-5 h-5"
+              className={isMobile ? 'w-6 h-6' : 'w-5 h-5'}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -132,42 +150,72 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </svg>
           </button>
 
-          {/* Content */}
-          <div className="p-6">
-            {/* Image carousel */}
+          {/* Content with mobile-first responsive layout */}
+          <div className={`${
+            isMobile 
+              ? 'flex-1 flex flex-col overflow-hidden'
+              : 'p-6'
+          }`}>
+            {/* Image carousel with mobile optimization */}
             {project.images.length > 0 && (
-              <div className="mb-6">
+              <div className={isMobile ? 'flex-shrink-0' : 'mb-6'}>
                 <ImageCarousel
                   images={project.images}
                   alt={getProjectText(project.titleKey)}
+                  isMobile={isMobile}
+                  enableSwipeGestures={isTouch}
                 />
               </div>
             )}
 
-            {/* Project details */}
-            <div className="space-y-6">
+            {/* Project details with responsive spacing */}
+            <div className={`${
+              isMobile 
+                ? 'flex-1 overflow-y-auto p-4 space-y-4'
+                : 'space-y-6'
+            }`}>
               <div>
                 <h2
                   id="modal-title"
-                  className="text-2xl md:text-3xl font-bold text-foreground mb-2"
+                  className={`${
+                    isMobile 
+                      ? 'text-responsive-2xl font-bold text-foreground mb-3'
+                      : 'text-2xl md:text-3xl font-bold text-foreground mb-2'
+                  }`}
                 >
                   {getProjectText(project.titleKey)}
                 </h2>
-                <p className="text-muted-foreground">
+                <p className={`${
+                  isMobile 
+                    ? 'text-responsive-base text-muted-foreground leading-relaxed'
+                    : 'text-muted-foreground'
+                }`}>
                   {getProjectText(project.longDescriptionKey)}
                 </p>
               </div>
 
-              {/* Technologies */}
+              {/* Technologies with responsive sizing */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-3">
+                <h3 className={`${
+                  isMobile 
+                    ? 'text-responsive-lg font-semibold text-foreground mb-3'
+                    : 'text-lg font-semibold text-foreground mb-3'
+                }`}>
                   Technologies
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className={`${
+                  isMobile 
+                    ? 'flex flex-wrap gap-2 sm:gap-3'
+                    : 'flex flex-wrap gap-2'
+                }`}>
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-accent text-accent-foreground text-sm rounded-md border border-border"
+                      className={`${
+                        isMobile 
+                          ? 'px-3 py-2 bg-accent text-accent-foreground text-sm rounded-md border border-border touch-target'
+                          : 'px-3 py-1 bg-accent text-accent-foreground text-sm rounded-md border border-border'
+                      }`}
                     >
                       {tech}
                     </span>
@@ -175,25 +223,44 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
               </div>
 
-              {/* Links */}
-              <div className="flex flex-wrap gap-4">
+              {/* Links with mobile-optimized touch targets */}
+              <div className={`${
+                isMobile 
+                  ? 'flex flex-col gap-3 pt-2'
+                  : 'flex flex-wrap gap-4'
+              }`}>
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() =>
+                    onClick={() => {
                       trackPortfolioEvent.projectLinkClick(
                         project.id,
                         'live',
                         project.liveUrl!
-                      )
-                    }
-                    className="inline-flex items-center px-4 py-2 bg-foreground text-background rounded-md hover:bg-foreground/90 transition-colors"
+                      );
+                      // Track mobile-specific interaction
+                      if (isMobile) {
+                        trackPortfolioEvent.custom('mobile_project_link_click', {
+                          project_id: project.id,
+                          link_type: 'live',
+                          breakpoint: currentBreakpoint,
+                          timestamp: Date.now(),
+                        });
+                      }
+                    }}
+                    className={`${
+                      isMobile
+                        ? 'inline-flex items-center justify-center w-full px-6 py-4 bg-foreground text-background rounded-md text-center font-medium touch-target active:scale-98'
+                        : 'inline-flex items-center px-4 py-2 bg-foreground text-background rounded-md hover:bg-foreground/90'
+                    } transition-all duration-200`}
                   >
                     View Live
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className={`${
+                        isMobile ? 'w-5 h-5 ml-3' : 'w-4 h-4 ml-2'
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -212,18 +279,33 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() =>
+                    onClick={() => {
                       trackPortfolioEvent.projectLinkClick(
                         project.id,
                         'github',
                         project.githubUrl!
-                      )
-                    }
-                    className="inline-flex items-center px-4 py-2 border border-border text-foreground rounded-md hover:bg-accent transition-colors"
+                      );
+                      // Track mobile-specific interaction
+                      if (isMobile) {
+                        trackPortfolioEvent.custom('mobile_project_link_click', {
+                          project_id: project.id,
+                          link_type: 'github',
+                          breakpoint: currentBreakpoint,
+                          timestamp: Date.now(),
+                        });
+                      }
+                    }}
+                    className={`${
+                      isMobile
+                        ? 'inline-flex items-center justify-center w-full px-6 py-4 border border-border text-foreground rounded-md text-center font-medium touch-target active:scale-98 hover:bg-accent'
+                        : 'inline-flex items-center px-4 py-2 border border-border text-foreground rounded-md hover:bg-accent'
+                    } transition-all duration-200`}
                   >
                     View Code
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className={`${
+                        isMobile ? 'w-5 h-5 ml-3' : 'w-4 h-4 ml-2'
+                      }`}
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
