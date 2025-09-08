@@ -66,7 +66,7 @@ export class WebVitalsTester {
    */
   private setupMockPerformanceAPI() {
     // Mock PerformanceObserver
-    global.PerformanceObserver = vi.fn().mockImplementation(() => {
+    const MockPerformanceObserver = vi.fn().mockImplementation(() => {
       const observer = {
         observe: vi.fn(),
         disconnect: vi.fn(),
@@ -74,7 +74,9 @@ export class WebVitalsTester {
       };
       this.observers.push(observer);
       return observer;
-    }) as unknown;
+    });
+    (MockPerformanceObserver as unknown as { supportedEntryTypes: readonly string[] }).supportedEntryTypes = [];
+    global.PerformanceObserver = MockPerformanceObserver as unknown as typeof PerformanceObserver;
 
     // Mock performance.now() to provide consistent timing
     vi.spyOn(performance, 'now').mockImplementation(() => {

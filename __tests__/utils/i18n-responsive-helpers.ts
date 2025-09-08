@@ -222,7 +222,7 @@ export async function testTextLengthScaling(
 
       await waitFor(() => {});
       
-      const validation = validateTextExpansionHandling(container, factor);
+      const validation = validateTextExpansionHandling(container);
       
       results.push({
         factor,
@@ -405,9 +405,9 @@ export async function testWithGermanContent(
 export const i18nMatchers = {
   toHandleGermanTextExpansion: (
     received: HTMLElement,
-    maxExpansionFactor: number = GERMAN_LAYOUT_CONFIG.maxExpansionFactor
+    _maxExpansionFactor: number = GERMAN_LAYOUT_CONFIG.maxExpansionFactor
   ) => {
-    const result = validateTextExpansionHandling(received, maxExpansionFactor);
+    const result = validateTextExpansionHandling(received);
     
     if (result.valid) {
       return {
